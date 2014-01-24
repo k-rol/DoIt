@@ -15,7 +15,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QSslConfiguration>
+#include <iostream>
+
 #include <QUrl>
 
 
@@ -28,17 +29,27 @@ GetterRequest::GetterRequest(QObject* parent)
 
 void GetterRequest::GetRequest()
 {
-	//const QUrl::fromEncoded command1("http%3A%2F%2F10.5.5.9%2Fbacpac%2FPW%3Ft%3DEvilation01%26p%3D%2501");
-	//QUrl command1 = QUrl::fromEncoded("http%3A%2F%2F10.5.5.9%2Fbacpac%2FPW%3Ft%3DEvilation01%26p%3D%2501", QUrl::StrictMode);
-	//QUrl command1 = QUrl::fromPercentEncoding("http%3A%2F%2F10.5.5.9%2Fbacpac%2FPW%3Ft%3DEvilation01%26p%3D%2501");
-	const QUrl command("http://10.5.5.9/bacpac/PW?t=Evilation01&p=%01");
+	//QUrl command("%1")
+
+
+	QUrl command (QString("%1%2").arg("http://10.5.5.9/").arg("bacpac/PW"));
+	//QUrl command("http://10.5.5.9/bacpac/PW");
+	//QString("%1%2%3%4").arg("=t").arg("Evilation01").arg("&p=").arg("%01")
+
+	std::string rawString("t=Evilation01&p=%01");
+	QByteArray rawQuery(rawString.c_str(),rawString.length());
+
+	//QByteArray rawQuery("t=Evilation01&p=%01");
+
+	command.setEncodedQuery(rawQuery);
 
 	QNetworkRequest request(command);
-
 	QNetworkReply* response = m_networkAccessManager->get(request);
-
 	QString urltostring; urltostring = command.toEncoded();
-	emit complete2(urltostring);
+
+	emit commandSent(urltostring);
+
+
 
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetReply()));
 	Q_ASSERT(ok);
@@ -108,7 +119,7 @@ void GetterRequest::onGetReply()
         response = tr("Unable to retrieve request headers");
     }
 
-    emit complete(response);
+    emit responseReceived(response);
 }
 
 GetterRequest::~GetterRequest() {

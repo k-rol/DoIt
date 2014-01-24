@@ -31,19 +31,19 @@ static const uint qt_meta_data_GetterRequest[] = {
 
  // signals: signature, parameters, type, tag, flags
       20,   15,   14,   14, 0x05,
-      50,   38,   14,   14, 0x05,
+      58,   46,   14,   14, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      66,   14,   14,   14, 0x0a,
-      79,   14,   14,   14, 0x08,
+      76,   14,   14,   14, 0x0a,
+      89,   14,   14,   14, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GetterRequest[] = {
-    "GetterRequest\0\0info\0complete(QString)\0"
-    "commandSent\0complete2(QUrl)\0GetRequest()\0"
-    "onGetReply()\0"
+    "GetterRequest\0\0info\0responseReceived(QString)\0"
+    "commandSent\0commandSent(QUrl)\0"
+    "GetRequest()\0onGetReply()\0"
 };
 
 void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -52,8 +52,8 @@ void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         Q_ASSERT(staticMetaObject.cast(_o));
         GetterRequest *_t = static_cast<GetterRequest *>(_o);
         switch (_id) {
-        case 0: _t->complete((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->complete2((*reinterpret_cast< const QUrl(*)>(_a[1]))); break;
+        case 0: _t->responseReceived((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: _t->commandSent((*reinterpret_cast< const QUrl(*)>(_a[1]))); break;
         case 2: _t->GetRequest(); break;
         case 3: _t->onGetReply(); break;
         default: ;
@@ -101,14 +101,14 @@ int GetterRequest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void GetterRequest::complete(const QString & _t1)
+void GetterRequest::responseReceived(const QString & _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void GetterRequest::complete2(const QUrl & _t1)
+void GetterRequest::commandSent(const QUrl & _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

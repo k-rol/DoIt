@@ -8,7 +8,7 @@
 #ifndef GETTERREQUEST_H_
 #define GETTERREQUEST_H_
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class QNetworkAccessManager;
 
@@ -23,9 +23,9 @@ public Q_SLOTS:
     void GetRequest();
 
 Q_SIGNALS:
-    void complete(const QString &info);
+    void responseReceived(const QString &info);
 
-    void complete2(const QUrl &commandSent);
+    void commandSent(const QUrl &commandSent);
 
 private Q_SLOTS:
     void onGetReply();

@@ -52,7 +52,6 @@
     <!-- <copyright></copyright> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
-    <author>Example Inc.</author>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/DoIt" entry="true" type="Qnx/Elf">DoIt</asset>
