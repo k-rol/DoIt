@@ -34,8 +34,8 @@ static const uint qt_meta_data_GetterRequest[] = {
       58,   46,   14,   14, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      97,   76,   14,   14, 0x0a,
-     133,   14,   14,   14, 0x08,
+      76,   14,   14,   14, 0x0a,
+      89,   14,   14,   14, 0x08,
 
        0        // eod
 };
@@ -43,9 +43,7 @@ static const uint qt_meta_data_GetterRequest[] = {
 static const char qt_meta_stringdata_GetterRequest[] = {
     "GetterRequest\0\0info\0responseReceived(QString)\0"
     "commandSent\0commandSent(QUrl)\0"
-    "password,cmd,cmdbyte\0"
-    "GetRequest(QString,QString,QString)\0"
-    "onGetReply()\0"
+    "GetRequest()\0onGetReply()\0"
 };
 
 void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -56,7 +54,7 @@ void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         switch (_id) {
         case 0: _t->responseReceived((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->commandSent((*reinterpret_cast< const QUrl(*)>(_a[1]))); break;
-        case 2: _t->GetRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 2: _t->GetRequest(); break;
         case 3: _t->onGetReply(); break;
         default: ;
         }

@@ -20,7 +20,7 @@ public:
     virtual ~GetterRequest();
 
 public Q_SLOTS:
-    void GetRequest();
+    void GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte);
 
 Q_SIGNALS:
     void responseReceived(const QString &info);

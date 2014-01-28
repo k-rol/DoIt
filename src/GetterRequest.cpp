@@ -16,10 +16,12 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <iostream>
-
+#include <string>
+#include <sstream>
 #include <QUrl>
 
 
+using namespace std;
 
 GetterRequest::GetterRequest(QObject* parent)
     : QObject(parent)
@@ -27,17 +29,23 @@ GetterRequest::GetterRequest(QObject* parent)
 {
 }
 
-void GetterRequest::GetRequest()
+void GetterRequest::GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte)
 {
 	//QUrl command("%1")
 
-
-	QUrl command (QString("%1%2").arg("http://10.5.5.9/").arg("bacpac/PW"));
+	QUrl command (QString("%1%2%3").arg("http://10.5.5.9/").arg("bacpac/").arg(cmd));
 	//QUrl command("http://10.5.5.9/bacpac/PW");
 	//QString("%1%2%3%4").arg("=t").arg("Evilation01").arg("&p=").arg("%01")
 
-	std::string rawString("t=Evilation01&p=%01");
+	std::ostringstream oss;
+	string passwordString = password.toUtf8().constData();
+	string cmdbyteString = cmdbyte.toUtf8().constData();
+	oss << "t=" << passwordString << "&p=%" << cmdbyteString;
+	string rawString = oss.str();
+
+	//string rawString("t=Evilation01&p=%01");
 	QByteArray rawQuery(rawString.c_str(),rawString.length());
+
 
 	//QByteArray rawQuery("t=Evilation01&p=%01");
 

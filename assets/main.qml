@@ -19,7 +19,7 @@ Page {
             text: "Power On"
             onClicked: {
                 //myTextArea.text="Turned On"
-                getThis.GetRequest();
+                getThis.GetRequest(passwordField.text, "PW", "01");
             }
             attachedObjects: [
                 GetterRequest {

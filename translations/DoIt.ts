@@ -4,12 +4,12 @@
 <context>
     <name>GetterRequest</name>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="111"/>
+        <location filename="../src/GetterRequest.cpp" line="119"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="119"/>
+        <location filename="../src/GetterRequest.cpp" line="127"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
