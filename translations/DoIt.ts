@@ -17,7 +17,8 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="9"/>
+        <location filename="../assets/main.qml" line="12"/>
+        <location filename="../assets/main.qml" line="63"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
