@@ -21,6 +21,14 @@
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
 
+//For Static ActiveFrame
+#include <bb/cascades/SceneCover>
+#include <bb/cascades/Container>
+
+//For Dynamic ActiveFrame
+#include "ActiveFrameUpdater.h"
+
+
 using namespace bb::cascades;
 
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
@@ -44,11 +52,34 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
+    //Create the Dynamic ActiveFrame using ActiveFrameUpdater.qml
+    ActiveFrameUpdater *activeFrame = new ActiveFrameUpdater();
+    Application::instance()->setCover(activeFrame);
+    qml->setContextProperty("activeFrame", activeFrame);
+
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
-
     // Set created root object as the application scene
     app->setScene(root);
+
+    //Creates the Static ActiveFrame
+    //addActiveFrame();
+}
+
+void ApplicationUI::addActiveFrame()
+{
+
+	QmlDocument *qmlCover = QmlDocument::create("asset:///DynamicFrame.qml").parent(this);
+
+
+	if (!qmlCover->hasErrors()) {
+		// Create the QML Container from using the QMLDocument.
+		Container *coverContainer = qmlCover->createRootObject<Container>();
+
+		// Create a SceneCover and set the application cover
+		SceneCover *sceneCover = SceneCover::create().content(coverContainer);
+		Application::instance()->setCover(sceneCover);
+	}
 }
 
 void ApplicationUI::onSystemLanguageChanged()

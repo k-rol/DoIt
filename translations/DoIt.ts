@@ -15,11 +15,34 @@
     </message>
 </context>
 <context>
+    <name>Settings</name>
+    <message>
+        <location filename="../assets/Settings.qml" line="24"/>
+        <source>Enter your GoPro&apos;s WiFi Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Settings.qml" line="30"/>
+        <source>password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="12"/>
-        <location filename="../assets/main.qml" line="63"/>
+        <location filename="../assets/main.qml" line="34"/>
+        <location filename="../assets/main.qml" line="87"/>
         <source>DoIt GoPro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="44"/>
+        <source>Power On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="64"/>
+        <source>Power Off</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

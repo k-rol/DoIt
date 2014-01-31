@@ -1,40 +1,44 @@
 import bb.cascades 1.2
 import Network.GetterRequest 1.0
 
+
 TabbedPane {
     id: thisTab
+    Menu.definition:  MenuDefinition {
+        helpAction: HelpActionItem {
+        
+        }
+        settingsAction: SettingsActionItem {
+            onTriggered: {
+                settings.open()
+            }
+        }
+    }
     Tab {
+          
         title: "first tab"
         content: Page {
             id: startpage
-            Menu.definition:  MenuDefinition {
-                helpAction: HelpActionItem {
-                    
-                }
-                settingsAction: SettingsActionItem {
-                    onTriggered: {
-                    
-                    }
-                }
-            }
             attachedObjects: [
-                ComponentDefinition {
-                    id: settingPage
-                    source: "settings.qml"
+                Settings {
+                    id: settings
+                    peekEnabled: false
+
                 }
             ]
             Container {
                 
                 Label {
+                    id: titlegopro
                     // Localized text with the dynamic translation and locale updates support
                     text: qsTr("DoIt GoPro") + Retranslate.onLocaleOrLanguageChanged
                     textStyle.base: SystemDefaults.TextStyles.BigText
                 }
                 TextField {
                     id: passwordField
-                    text: "GoPro Password here"
                     horizontalAlignment: HorizontalAlignment.Left
                     verticalAlignment: VerticalAlignment.Center
+                    hintText: "GoPro Password here"
                 }
                 Button {
                     text: qsTr("Power On") + Retranslate.onLocaleOrLanguageChanged
@@ -59,7 +63,7 @@ TabbedPane {
                 Button {
                     text: qsTr("Power Off") + Retranslate.onLocaleOrLanguageChanged
                     onClicked: {
-                        commandArea.text="Turned Off"                
+                        getThis.GetRequest(passwordField.text, "PW", "00")                
                     }
                 }
                 TextArea {
@@ -87,5 +91,11 @@ TabbedPane {
         }
 
     }
-
+    onCreationCompleted: {
+      Application.thumbnail.connect(onMinimized)
+      }
+	function onMinimized()
+	{
+        activeFrame.update(responseArea.text)
+    }
 }

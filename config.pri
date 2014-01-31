@@ -18,11 +18,13 @@ device {
                 -lbbdata \
                 -lQtNetwork
 
-        SOURCES +=  $$quote($$BASEDIR/src/GetterRequest.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.cpp) \
+                 $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/GetterRequest.h) \
+        HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
+                 $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/applicationui.hpp)
     }
 
@@ -42,11 +44,13 @@ device {
                 -lbbdata \
                 -lQtNetwork
 
-        SOURCES +=  $$quote($$BASEDIR/src/GetterRequest.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.cpp) \
+                 $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/GetterRequest.h) \
+        HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
+                 $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/applicationui.hpp)
     }
 }
@@ -68,11 +72,13 @@ simulator {
                 -lbbdata \
                 -lQtNetwork
 
-        SOURCES +=  $$quote($$BASEDIR/src/GetterRequest.cpp) \
+        SOURCES +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.cpp) \
+                 $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp)
 
-        HEADERS +=  $$quote($$BASEDIR/src/GetterRequest.h) \
+        HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
+                 $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/applicationui.hpp)
     }
 }

@@ -47,6 +47,7 @@ private slots:
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
+    void addActiveFrame();
 };
 
 #endif /* ApplicationUI_HPP_ */
