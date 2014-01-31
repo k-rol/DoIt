@@ -73,6 +73,10 @@ TabbedPane {
                 TextArea {
                     id: responseArea
                     text: "Response here."
+                    onTextChanged: {
+                        activeFrame.update(responseArea.text)
+                    }
+
                 }
             }
         }

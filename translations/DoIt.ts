@@ -31,7 +31,7 @@
     <name>main</name>
     <message>
         <location filename="../assets/main.qml" line="34"/>
-        <location filename="../assets/main.qml" line="87"/>
+        <location filename="../assets/main.qml" line="91"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
