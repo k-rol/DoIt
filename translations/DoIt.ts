@@ -17,12 +17,12 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../assets/Settings.qml" line="24"/>
+        <location filename="../assets/Settings.qml" line="29"/>
         <source>Enter your GoPro&apos;s WiFi Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="30"/>
+        <location filename="../assets/Settings.qml" line="36"/>
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>

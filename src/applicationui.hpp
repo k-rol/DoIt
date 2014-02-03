@@ -19,6 +19,7 @@
 
 #include <QObject>
 
+
 namespace bb
 {
     namespace cascades
@@ -42,6 +43,31 @@ class ApplicationUI : public QObject
 public:
     ApplicationUI(bb::cascades::Application *app);
     virtual ~ApplicationUI() { }
+
+
+    /**
+     * This function sets a value in the QSettings database. This function should to be called
+     * when a data value has been updated from QML
+     *
+     * @param settingObject Index path to the item
+     * @param settingValue new value to the QSettings database
+     */
+Q_INVOKABLE void setSettings(const QString &settingObject, const QString &settingValue);
+
+/**
+ * This Invokable function gets a value from the QSettings,
+ * if that value does not exist in the QSettings database, the default value is returned.
+ *
+ * @param settingObject Index path to the item
+ * @param settingValue Used to create the data in the database when adding
+ * @return If the settingOBject exists, the value of the QSettings object is returned.
+ *         If the settingOBject doesn't exist, the default value is returned.
+ */
+Q_INVOKABLE QString getSettings(const QString &settingObject);
+
+Q_INVOKABLE void syncSettings();
+
+
 private slots:
     void onSystemLanguageChanged();
 private:

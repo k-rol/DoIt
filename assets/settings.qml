@@ -8,6 +8,11 @@ Sheet {
              kind: TitleBarKind.Default
             acceptAction: ActionItem {
                 title: "Save"
+                onTriggered: {
+                    doitsettings.setSettings(objectName, passwordField.text)
+                    doitsettings.syncSettings()
+                    mySheet.close()
+                }
 
             }
             dismissAction: ActionItem {
@@ -26,8 +31,11 @@ Sheet {
             }
             
             TextField {
+                id: passwordField
                 input.masking: TextInputMasking.Masked
                 hintText: qsTr("password")
+                text: doitsettings.getSettings(objectName);
+                objectName: "password"
                 verticalAlignment: VerticalAlignment.Top
                 maxWidth: 560.0
                 inputMode: TextFieldInputMode.Password

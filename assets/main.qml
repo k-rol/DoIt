@@ -44,8 +44,8 @@ TabbedPane {
                     text: qsTr("Power On") + Retranslate.onLocaleOrLanguageChanged
                     
                     onClicked: {
-                        //myTextArea.text="Turned On"
-                        getThis.GetRequest(passwordField.text, "PW", "01");
+                        
+                        getThis.GetRequest(doitsettings.getSettings(passwordField), "PW", "01");
                         
                     }
                     attachedObjects: [

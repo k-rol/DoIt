@@ -20,6 +20,7 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
+#include <QSettings>
 
 //For Static ActiveFrame
 #include <bb/cascades/SceneCover>
@@ -34,6 +35,9 @@ using namespace bb::cascades;
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
         QObject(app)
 {
+    QCoreApplication::setOrganizationName("KRol");
+    QCoreApplication::setApplicationName("DoIt GoPro");
+
     // prepare the localization
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
@@ -52,10 +56,14 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
+    //set context for using as QSettings
+    qml->setContextProperty("doitsettings",this);
+
     //Create the Dynamic ActiveFrame using ActiveFrameUpdater.qml
     ActiveFrameUpdater *activeFrame = new ActiveFrameUpdater();
     Application::instance()->setCover(activeFrame);
     qml->setContextProperty("activeFrame", activeFrame);
+
 
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -65,6 +73,34 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     //Creates the Static ActiveFrame
     //addActiveFrame();
 }
+
+QString ApplicationUI::getSettings(const QString &settingObject)
+{
+	QSettings settings;
+
+	//if (settings.value(settingObject).isNull())
+	//{
+	//	return "";
+	//}
+
+
+	return settings.value(settingObject).toString();
+}
+
+void ApplicationUI::setSettings(const QString &settingObject, const QString &settingValue)
+{
+	QSettings settings;
+
+	settings.setValue(settingObject, QVariant(settingValue));
+
+}
+
+void ApplicationUI::syncSettings()
+{
+	QSettings settings;
+	settings.sync();
+}
+
 
 void ApplicationUI::addActiveFrame()
 {

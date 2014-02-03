@@ -22,7 +22,7 @@ static const uint qt_meta_data_ApplicationUI[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,11 +32,20 @@ static const uint qt_meta_data_ApplicationUI[] = {
  // slots: signature, parameters, type, tag, flags
       15,   14,   14,   14, 0x08,
 
+ // methods: signature, parameters, type, tag, flags
+      68,   41,   14,   14, 0x02,
+     119,  105,   97,   14, 0x02,
+     140,   14,   14,   14, 0x02,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_ApplicationUI[] = {
     "ApplicationUI\0\0onSystemLanguageChanged()\0"
+    "settingObject,settingValue\0"
+    "setSettings(QString,QString)\0QString\0"
+    "settingObject\0getSettings(QString)\0"
+    "syncSettings()\0"
 };
 
 void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -46,10 +55,13 @@ void ApplicationUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         ApplicationUI *_t = static_cast<ApplicationUI *>(_o);
         switch (_id) {
         case 0: _t->onSystemLanguageChanged(); break;
+        case 1: _t->setSettings((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 2: { QString _r = _t->getSettings((*reinterpret_cast< const QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = _r; }  break;
+        case 3: _t->syncSettings(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData ApplicationUI::staticMetaObjectExtraData = {
@@ -84,9 +96,9 @@ int ApplicationUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }
