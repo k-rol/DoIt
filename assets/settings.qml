@@ -34,7 +34,7 @@ Sheet {
                 id: passwordField
                 input.masking: TextInputMasking.Masked
                 hintText: qsTr("password")
-                text: doitsettings.getSettings(objectName);
+                text: doitsettings.getSettings(passwordField.objectName);
                 objectName: "password"
                 verticalAlignment: VerticalAlignment.Top
                 maxWidth: 560.0

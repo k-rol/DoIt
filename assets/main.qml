@@ -35,17 +35,18 @@ TabbedPane {
                     textStyle.base: SystemDefaults.TextStyles.BigText
                 }
                 TextField {
-                    id: passwordField
+                    id: oldpasswordField
                     horizontalAlignment: HorizontalAlignment.Left
                     verticalAlignment: VerticalAlignment.Center
                     hintText: "GoPro Password here"
+                    visible: false
                 }
                 Button {
                     text: qsTr("Power On") + Retranslate.onLocaleOrLanguageChanged
                     
                     onClicked: {
                         
-                        getThis.GetRequest(doitsettings.getSettings(passwordField), "PW", "01");
+                        getThis.GetRequest(doitsettings.getSettings(passwordField.ObjectName), "PW", "01");
                         
                     }
                     attachedObjects: [
