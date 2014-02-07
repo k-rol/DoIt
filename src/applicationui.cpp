@@ -29,6 +29,7 @@
 //For Dynamic ActiveFrame
 #include "ActiveFrameUpdater.h"
 
+#include "QmlBeam.h"
 
 using namespace bb::cascades;
 
@@ -70,6 +71,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     // Set created root object as the application scene
     app->setScene(root);
 
+    new QmlBeam(this);
     //Creates the Static ActiveFrame
     //addActiveFrame();
 }

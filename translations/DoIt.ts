@@ -31,18 +31,22 @@
     <name>main</name>
     <message>
         <location filename="../assets/main.qml" line="34"/>
-        <location filename="../assets/main.qml" line="91"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="44"/>
+        <location filename="../assets/main.qml" line="45"/>
         <source>Power On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="64"/>
+        <location filename="../assets/main.qml" line="65"/>
         <source>Power Off</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="92"/>
+        <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

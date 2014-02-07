@@ -9,7 +9,7 @@ Sheet {
             acceptAction: ActionItem {
                 title: "Save"
                 onTriggered: {
-                    doitsettings.setSettings(objectName, passwordField.text)
+                    doitsettings.setSettings(passwordField.objectName, passwordField.text)
                     doitsettings.syncSettings()
                     mySheet.close()
                 }
@@ -34,7 +34,8 @@ Sheet {
                 id: passwordField
                 input.masking: TextInputMasking.Masked
                 hintText: qsTr("password")
-                text: doitsettings.getSettings(passwordField.objectName);
+                text: doitsettings.getSettings(passwordField.objectName)
+                
                 objectName: "password"
                 verticalAlignment: VerticalAlignment.Top
                 maxWidth: 560.0
