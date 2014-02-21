@@ -1,5 +1,7 @@
 1
-3
+5
 DynamicFrame.qml
+LivePreview.qml
 main.qml
 Settings.qml
+VideoViewer.qml

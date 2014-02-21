@@ -105,12 +105,31 @@ TabbedPane {
             Page {
                 titleBar: TitleBar {
                     title: "Live Preview"
-
                 }
-                
+                LivePreview {
+                    
+                }
 
             }
 
+        }
+    }
+    
+    Tab {
+        title: "Video Viewer"
+        content: NavigationPane {
+            peekEnabled: false
+            backButtonsVisible: true
+            Page {
+                titleBar: TitleBar {
+                    title: "Video Previews"
+                }
+                VideoViewer {
+                
+                }
+            
+            }
+        
         }
     }
     onCreationCompleted: {
