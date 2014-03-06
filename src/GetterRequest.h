@@ -21,6 +21,7 @@ public:
 
 public Q_SLOTS:
     void GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte);
+    void StatRequest(const QString &password, const QString &cmd);
 
 Q_SIGNALS:
     void responseReceived(const QString &info);

@@ -4,12 +4,12 @@
 <context>
     <name>GetterRequest</name>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="119"/>
+        <location filename="../src/GetterRequest.cpp" line="151"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="127"/>
+        <location filename="../src/GetterRequest.cpp" line="159"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,7 +45,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="92"/>
+        <location filename="../assets/main.qml" line="98"/>
         <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>

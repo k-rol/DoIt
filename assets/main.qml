@@ -79,6 +79,12 @@ TabbedPane {
                     }
 
                 }
+                Button {
+                    text: "stats"
+                    onClicked: {
+                        getThis.StatRequest(doitsettings.getSettings("password"),"se")
+                    }
+                }
             }
         }
 

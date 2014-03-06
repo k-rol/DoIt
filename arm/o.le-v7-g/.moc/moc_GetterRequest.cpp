@@ -22,7 +22,7 @@ static const uint qt_meta_data_GetterRequest[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,7 +35,8 @@ static const uint qt_meta_data_GetterRequest[] = {
 
  // slots: signature, parameters, type, tag, flags
       97,   76,   14,   14, 0x0a,
-     133,   14,   14,   14, 0x08,
+     146,  133,   14,   14, 0x0a,
+     175,   14,   14,   14, 0x08,
 
        0        // eod
 };
@@ -45,6 +46,7 @@ static const char qt_meta_stringdata_GetterRequest[] = {
     "commandSent\0commandSent(QUrl)\0"
     "password,cmd,cmdbyte\0"
     "GetRequest(QString,QString,QString)\0"
+    "password,cmd\0StatRequest(QString,QString)\0"
     "onGetReply()\0"
 };
 
@@ -57,7 +59,8 @@ void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->responseReceived((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->commandSent((*reinterpret_cast< const QUrl(*)>(_a[1]))); break;
         case 2: _t->GetRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
-        case 3: _t->onGetReply(); break;
+        case 3: _t->StatRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 4: _t->onGetReply(); break;
         default: ;
         }
     }
@@ -95,9 +98,9 @@ int GetterRequest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

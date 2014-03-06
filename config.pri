@@ -4,13 +4,13 @@ BASEDIR =  $$quote($$_PRO_FILE_PWD_)
 device {
     CONFIG(debug, debug|release) {
         INCLUDEPATH +=  $$quote(${QNX_TARGET}/usr/include/bb/cascades/datamanager) \
-                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/bb/data) \
+                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
 
         DEPENDPATH +=  $$quote(${QNX_TARGET}/usr/include/bb/cascades/datamanager) \
-                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/bb/data) \
+                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
 
         LIBS += -lbbcascadesdatamanager \
@@ -32,13 +32,13 @@ device {
 
     CONFIG(release, debug|release) {
         INCLUDEPATH +=  $$quote(${QNX_TARGET}/usr/include/bb/cascades/datamanager) \
-                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/bb/data) \
+                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
 
         DEPENDPATH +=  $$quote(${QNX_TARGET}/usr/include/bb/cascades/datamanager) \
-                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/bb/data) \
+                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
 
         LIBS += -lbbcascadesdatamanager \
@@ -62,13 +62,13 @@ device {
 simulator {
     CONFIG(debug, debug|release) {
         INCLUDEPATH +=  $$quote(${QNX_TARGET}/usr/include/bb/cascades/datamanager) \
-                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/bb/data) \
+                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
 
         DEPENDPATH +=  $$quote(${QNX_TARGET}/usr/include/bb/cascades/datamanager) \
-                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/bb/data) \
+                 $$quote(${QNX_TARGET}/usr/include/qt4/QtNetwork) \
                  $$quote(${QNX_TARGET}/usr/include/qt4/QtCore)
 
         LIBS += -lbbcascadesdatamanager \

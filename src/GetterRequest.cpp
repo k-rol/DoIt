@@ -64,6 +64,38 @@ void GetterRequest::GetRequest(const QString &password, const QString &cmd, cons
 	Q_UNUSED(ok);
 }
 
+///////////////////////
+//To get the stats "se"
+///////////////////////
+void GetterRequest::StatRequest(const QString &password, const QString &cmd)
+{
+	QUrl command (QString("%1%2%3").arg("http://10.5.5.9/").arg("camera/").arg(cmd));
+
+	std::ostringstream oss;
+	string passwordString = password.toUtf8().constData();
+
+	oss << "t=" << passwordString;
+	string rawString = oss.str();
+
+	//string rawString("t=Evilation01");
+	QByteArray rawQuery(rawString.c_str(),rawString.length());
+
+
+	//QByteArray rawQuery("t=Evilation01");
+
+	command.setEncodedQuery(rawQuery);
+
+	QNetworkRequest request(command);
+	QNetworkReply* response = m_networkAccessManager->get(request);
+	QString urltostring; urltostring = command.toEncoded();
+
+	emit commandSent(urltostring);
+
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetReply()));
+	Q_ASSERT(ok);
+	Q_UNUSED(ok);
+}
+
 void GetterRequest::onGetReply()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());

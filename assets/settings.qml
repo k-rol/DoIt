@@ -34,7 +34,7 @@ Sheet {
                 id: passwordField
                 input.masking: TextInputMasking.Masked
                 hintText: qsTr("password")
-                text: doitsettings.getSettings(passwordField.objectName)
+                text: doitsettings.getSettings("password")
                 
                 objectName: "password"
                 verticalAlignment: VerticalAlignment.Top
