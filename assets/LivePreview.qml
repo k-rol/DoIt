@@ -12,10 +12,10 @@ Container {
             id: vidPlayer
             //sourceUrl: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
             sourceUrl: "http://10.5.5.9:8080/live/amba.m3u8"
-            videoOutput: VideoOutput.PrimaryDisplay
+            videoOutput: Output.PrimaryDisplay
             
             // The name of the window to create
-            windowId: fwcVideoSurface.windowId
+            windowId: fwcLiveSurface.windowId
         
         
         }
@@ -23,8 +23,8 @@ Container {
     
     ForeignWindowControl {
         verticalAlignment: VerticalAlignment.Top
-        id: fwcVideoSurface
-        windowId: "myVideoSurface"
+        id: fwcLiveSurface
+        windowId: "myLiveSurface"
         
         updatedProperties: WindowProperty.Size |
         WindowProperty.Position |

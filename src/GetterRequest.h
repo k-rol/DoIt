@@ -22,6 +22,7 @@ public:
 public Q_SLOTS:
     void GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte);
     void StatRequest(const QString &password, const QString &cmd);
+    void whatEveRequest(const QString &rest);
 
 Q_SIGNALS:
     void responseReceived(const QString &info);
@@ -30,6 +31,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onGetReply();
+    void onGetWhatEve();
 
 private:
     QNetworkAccessManager* m_networkAccessManager;

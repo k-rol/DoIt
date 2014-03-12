@@ -77,11 +77,7 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 	oss << "t=" << passwordString;
 	string rawString = oss.str();
 
-	//string rawString("t=Evilation01");
 	QByteArray rawQuery(rawString.c_str(),rawString.length());
-
-
-	//QByteArray rawQuery("t=Evilation01");
 
 	command.setEncodedQuery(rawQuery);
 
@@ -95,6 +91,83 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
 }
+
+
+///////////////////////
+//To get the whatever from mocky.io
+///////////////////////
+void GetterRequest::whatEveRequest(const QString &rest)
+{
+	QUrl command (QString("%1%2").arg("http://www.mocky.io/v2/").arg(rest));
+
+	QNetworkRequest request(command);
+	QNetworkReply* response = m_networkAccessManager->get(request);
+	QString urltostring; urltostring = command.toEncoded();
+
+	emit commandSent(urltostring);
+
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetWhatEve()));
+	Q_ASSERT(ok);
+	Q_UNUSED(ok);
+}
+
+void GetterRequest::onGetWhatEve()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+    QString response;
+    if (reply) {
+        if (reply->error() == QNetworkReply::NoError) {
+            const int available = reply->bytesAvailable();
+
+            if (available > 0) {
+                const QByteArray buffer(reply->readAll());
+
+                bb::data::JsonDataAccess ja;
+                const QVariant jsonva = ja.loadFromBuffer(buffer);
+                const QMap<QString, QVariant> jsonreply = jsonva.toMap();
+
+                // Locate the header array
+                QMap<QString, QVariant>::const_iterator it = jsonreply.find("headers");
+                if (it != jsonreply.end()) {
+                    // Print everything in header array
+                    const QMap<QString, QVariant> headers = it.value().toMap();
+                    for (QMap<QString, QVariant>::const_iterator hdrIter = headers.begin(); hdrIter != headers.end(); ++hdrIter) {
+                        if (hdrIter.value().toString().trimmed().isEmpty())
+                            continue; // Skip empty values
+
+                        response += QString::fromLatin1("%1: %2\r\n").arg(hdrIter.key(), hdrIter.value().toString());
+                    }
+                }
+
+                // Print everything else
+                for (it = jsonreply.begin(); it != jsonreply.end(); it++) {
+                    if (it.value().toString().trimmed().isEmpty())
+                        continue;  // Skip empty values
+
+                    response += QString::fromLatin1("%1: %2\r\n").arg(it.key(), it.value().toString());
+                }
+            }
+
+        } else {
+            response =  tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString());
+            qDebug() << response;
+        }
+
+        reply->deleteLater();
+    }
+
+    if (response.trimmed().isEmpty()) {
+        response = tr("Unable to retrieve WhatEve request headers");
+    }
+
+    emit responseReceived(response);
+}
+//END/////////////////////
+//To get the whatever from mocky.io
+//END/////////////////////
+
+
 
 void GetterRequest::onGetReply()
 {

@@ -4,12 +4,18 @@
 <context>
     <name>GetterRequest</name>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="151"/>
+        <location filename="../src/GetterRequest.cpp" line="153"/>
+        <location filename="../src/GetterRequest.cpp" line="224"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="159"/>
+        <location filename="../src/GetterRequest.cpp" line="161"/>
+        <source>Unable to retrieve WhatEve request headers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GetterRequest.cpp" line="232"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,7 +51,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="98"/>
+        <location filename="../assets/main.qml" line="104"/>
         <source>Camera Settings</source>
         <translation type="unfinished"></translation>
     </message>

@@ -85,6 +85,12 @@ TabbedPane {
                         getThis.StatRequest(doitsettings.getSettings("password"),"se")
                     }
                 }
+                Button {
+                    text: "mocky"
+                    onClicked: {
+                        getThis.whatEveRequest("5320c1c979841eda163125a8")
+                    }
+                }
             }
         }
 
