@@ -19,6 +19,7 @@
 #include <string>
 #include <sstream>
 #include <QUrl>
+#include <math.h>
 
 
 using namespace std;
@@ -87,7 +88,7 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 
 	emit commandSent(urltostring);
 
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetWhatEve()));
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
 }
@@ -106,26 +107,36 @@ void GetterRequest::whatEveRequest(const QString &rest)
 
 	emit commandSent(urltostring);
 
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetWhatEve()));
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
 }
 
-void GetterRequest::onGetWhatEve()
+void GetterRequest::onGetStats()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
     QString response;
+    float batteryLevel;
+
+
     if (reply) {
         if (reply->error() == QNetworkReply::NoError) {
-            const int available = reply->bytesAvailable();
+        	const int available = reply->bytesAvailable();
 
             if (available > 0) {
-                const QByteArray buffer(reply->readAll());
 
-                QString something(buffer);
+            	QByteArray buffer(reply->readAll());
+
+                QString something(buffer.toHex());
                 response = something;
+                bool ok;
+                batteryLevel = buffer.toHex().mid(38,2).toInt(&ok,16);
+                qDebug() << batteryLevel;
+                batteryLevel = roundf(batteryLevel / 70 * 100);
                 qDebug() << response;
+                qDebug() << batteryLevel;
+
             }
 
         } else {
@@ -140,7 +151,7 @@ void GetterRequest::onGetWhatEve()
         response = tr("Unable to retrieve request headers");
     }
 
-    emit responseReceived(response);
+    emit statsReceived(response, batteryLevel);
 }
 //END/////////////////////
 //To get the whatever from mocky.io

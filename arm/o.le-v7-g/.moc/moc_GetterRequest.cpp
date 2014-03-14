@@ -22,35 +22,37 @@ static const uint qt_meta_data_GetterRequest[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: signature, parameters, type, tag, flags
       20,   15,   14,   14, 0x05,
-      58,   46,   14,   14, 0x05,
+      57,   46,   14,   14, 0x05,
+      96,   84,   14,   14, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      97,   76,   14,   14, 0x0a,
-     146,  133,   14,   14, 0x0a,
-     180,  175,   14,   14, 0x0a,
-     204,   14,   14,   14, 0x08,
-     217,   14,   14,   14, 0x08,
+     135,  114,   14,   14, 0x0a,
+     184,  171,   14,   14, 0x0a,
+     218,  213,   14,   14, 0x0a,
+     242,   14,   14,   14, 0x08,
+     255,   14,   14,   14, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GetterRequest[] = {
     "GetterRequest\0\0info\0responseReceived(QString)\0"
+    "info,info2\0statsReceived(QString,int)\0"
     "commandSent\0commandSent(QUrl)\0"
     "password,cmd,cmdbyte\0"
     "GetRequest(QString,QString,QString)\0"
     "password,cmd\0StatRequest(QString,QString)\0"
     "rest\0whatEveRequest(QString)\0onGetReply()\0"
-    "onGetWhatEve()\0"
+    "onGetStats()\0"
 };
 
 void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -60,12 +62,13 @@ void GetterRequest::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         GetterRequest *_t = static_cast<GetterRequest *>(_o);
         switch (_id) {
         case 0: _t->responseReceived((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 1: _t->commandSent((*reinterpret_cast< const QUrl(*)>(_a[1]))); break;
-        case 2: _t->GetRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
-        case 3: _t->StatRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
-        case 4: _t->whatEveRequest((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 5: _t->onGetReply(); break;
-        case 6: _t->onGetWhatEve(); break;
+        case 1: _t->statsReceived((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const int(*)>(_a[2]))); break;
+        case 2: _t->commandSent((*reinterpret_cast< const QUrl(*)>(_a[1]))); break;
+        case 3: _t->GetRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
+        case 4: _t->StatRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 5: _t->whatEveRequest((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->onGetReply(); break;
+        case 7: _t->onGetStats(); break;
         default: ;
         }
     }
@@ -103,9 +106,9 @@ int GetterRequest::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }
@@ -118,9 +121,16 @@ void GetterRequest::responseReceived(const QString & _t1)
 }
 
 // SIGNAL 1
+void GetterRequest::statsReceived(const QString & _t1, const int & _t2)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
 void GetterRequest::commandSent(const QUrl & _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_END_MOC_NAMESPACE

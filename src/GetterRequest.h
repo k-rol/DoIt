@@ -26,12 +26,13 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void responseReceived(const QString &info);
+    void statsReceived(const QString &info, const int &info2);
 
     void commandSent(const QUrl &commandSent);
 
 private Q_SLOTS:
     void onGetReply();
-    void onGetWhatEve();
+    void onGetStats();
 
 private:
     QNetworkAccessManager* m_networkAccessManager;

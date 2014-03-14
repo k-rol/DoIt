@@ -57,6 +57,11 @@ TabbedPane {
                             }
                             onResponseReceived: {
                                 responseArea.text = info;
+                                
+                            }
+                            onStatsReceived: {
+                                responseArea.text = info
+                                batteryLabel.text = info2 + "%"
                             }
                         }
                     ]
@@ -90,6 +95,13 @@ TabbedPane {
                     onClicked: {
                         getThis.whatEveRequest("5320c1c979841eda163125a8")
                     }
+                }
+                Label {
+                    text: "Battery Level:"
+                }
+                Label {
+                    id: batteryLabel
+                    text: "%"
                 }
             }
         }
