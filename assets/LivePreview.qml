@@ -2,6 +2,8 @@ import bb.cascades 1.2
 import Network.GetterRequest 1.0
 import bb.multimedia 1.0
 
+Page {
+    
 
 Container {
     layout: DockLayout {
@@ -9,15 +11,14 @@ Container {
     
     attachedObjects:[
         MediaPlayer {
-            id: vidPlayer
-            //sourceUrl: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
-            sourceUrl: "http://10.5.5.9:8080/live/amba.m3u8"
-            videoOutput: Output.PrimaryDisplay
+            id: livePlayer
+            sourceUrl: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
+            //sourceUrl: "http://10.5.5.9:8080/live/amba.m3u8"
+            videoOutput: VideoOutput.PrimaryDisplay
             
             // The name of the window to create
             windowId: fwcLiveSurface.windowId
-        
-        
+            
         }
     ]
     
@@ -25,7 +26,7 @@ Container {
         verticalAlignment: VerticalAlignment.Top
         id: fwcLiveSurface
         windowId: "myLiveSurface"
-        
+        visible: false
         updatedProperties: WindowProperty.Size |
         WindowProperty.Position |
         WindowProperty.Visible
@@ -52,8 +53,9 @@ Container {
                 
                 text: "Start Preview"
                 onClicked: {
-                    //vidPlayer.setSourceUrl("http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8")
-                    if (vidPlayer.play() != MediaError.None) {
+                    //livePlayer.setSourceUrl("http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8")
+                    fwcLiveSurface.visible = true
+                    if (livePlayer.play() != MediaError.None) {
                         // Put your error handling code here
                     }
                 }
@@ -63,7 +65,8 @@ Container {
             Button {
                 text: "Stop Preview"
                 onClicked: {
-                    if (vidPlayer.stop() != MediaError.None) {
+                    fwcLiveSurface.visible = false
+                    if (livePlayer.stop() != MediaError.None) {
                         // Put your error handing code here
                     }
                 }
@@ -105,3 +108,4 @@ Container {
 
 }
 
+}

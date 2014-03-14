@@ -123,30 +123,9 @@ void GetterRequest::onGetWhatEve()
             if (available > 0) {
                 const QByteArray buffer(reply->readAll());
 
-                bb::data::JsonDataAccess ja;
-                const QVariant jsonva = ja.loadFromBuffer(buffer);
-                const QMap<QString, QVariant> jsonreply = jsonva.toMap();
-
-                // Locate the header array
-                QMap<QString, QVariant>::const_iterator it = jsonreply.find("headers");
-                if (it != jsonreply.end()) {
-                    // Print everything in header array
-                    const QMap<QString, QVariant> headers = it.value().toMap();
-                    for (QMap<QString, QVariant>::const_iterator hdrIter = headers.begin(); hdrIter != headers.end(); ++hdrIter) {
-                        if (hdrIter.value().toString().trimmed().isEmpty())
-                            continue; // Skip empty values
-
-                        response += QString::fromLatin1("%1: %2\r\n").arg(hdrIter.key(), hdrIter.value().toString());
-                    }
-                }
-
-                // Print everything else
-                for (it = jsonreply.begin(); it != jsonreply.end(); it++) {
-                    if (it.value().toString().trimmed().isEmpty())
-                        continue;  // Skip empty values
-
-                    response += QString::fromLatin1("%1: %2\r\n").arg(it.key(), it.value().toString());
-                }
+                QString something(buffer);
+                response = something;
+                qDebug() << response;
             }
 
         } else {
@@ -158,7 +137,7 @@ void GetterRequest::onGetWhatEve()
     }
 
     if (response.trimmed().isEmpty()) {
-        response = tr("Unable to retrieve WhatEve request headers");
+        response = tr("Unable to retrieve request headers");
     }
 
     emit responseReceived(response);

@@ -110,39 +110,46 @@ TabbedPane {
     }
     
     Tab {
-        title: "live"
-        content: NavigationPane {
-            peekEnabled: false
-            backButtonsVisible: true
-            Page {
-                titleBar: TitleBar {
-                    title: "Live Preview"
-                }
-                LivePreview {
-                    
-                }
-
-            }
-
+        id: tabLivePreview
+        title: "live Preview"
+        delegate: Delegate {
+            id: delegateLivePreview
+            source: "LivePreview.qml"
         }
+        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
+//        content: NavigationPane {
+//            peekEnabled: false
+//            backButtonsVisible: true
+//            Page {
+//                titleBar: TitleBar {
+//                    title: "Live Preview"
+//                }
+//                LivePreview {
+//                }
+//            }
+//        }
+        
     }
     
     Tab {
+        id: tabVideoViewer
         title: "Video Viewer"
-        content: NavigationPane {
-            peekEnabled: false
-            backButtonsVisible: true
-            Page {
-                titleBar: TitleBar {
-                    title: "Video Previews"
-                }
-                VideoViewer {
-                
-                }
-            
-            }
-        
+        delegate: Delegate {
+            id: delegateVideoViewer
+            source: "VideoViewer.qml"
         }
+        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
+
+//        content: NavigationPane {
+//            peekEnabled: false
+//            backButtonsVisible: true
+//            Page {
+//                titleBar: TitleBar {
+//                    title: "Video Previews"
+//                }
+//                VideoViewer {}
+//            }
+//        }
     }
     onCreationCompleted: {
       Application.thumbnail.connect(onMinimized)
@@ -151,4 +158,6 @@ TabbedPane {
 	{
         activeFrame.update(responseArea.text)
     }
+	
+	
 }

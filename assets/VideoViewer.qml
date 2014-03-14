@@ -2,6 +2,8 @@ import bb.cascades 1.2
 import Network.GetterRequest 1.0
 import bb.multimedia 1.0
 
+Page {
+    
 
 Container {
     layout: DockLayout {
@@ -10,8 +12,8 @@ Container {
     attachedObjects:[
         MediaPlayer {
             id: vidPlayer
-            //sourceUrl: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
-            sourceUrl: "http://10.5.5.9:8080/videos/DCIM/100GOPRO/GOPR0026.LRV"
+            sourceUrl: "http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"
+            //sourceUrl: "http://10.5.5.9:8080/videos/DCIM/100GOPRO/GOPR0026.LRV"
             videoOutput: VideoOutput.PrimaryDisplay
             
             // The name of the window to create
@@ -25,7 +27,7 @@ Container {
         verticalAlignment: VerticalAlignment.Top
         id: fwcVideoSurface
         windowId: "myVideoSurface"
-        
+        visible: false
         updatedProperties: WindowProperty.Size |
         WindowProperty.Position |
         WindowProperty.Visible
@@ -52,6 +54,7 @@ Container {
                 
                 text: "Start Preview"
                 onClicked: {
+                    fwcVideoSurface.visible = true
                     //vidPlayer.setSourceUrl("http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8")
                     if (vidPlayer.play() != MediaError.None) {
                         // Put your error handling code here
@@ -63,6 +66,7 @@ Container {
             Button {
                 text: "Stop Preview"
                 onClicked: {
+                    fwcVideoSurface.visible = false
                     if (vidPlayer.stop() != MediaError.None) {
                         // Put your error handing code here
                     }
@@ -104,4 +108,4 @@ Container {
     }
 
 }
-
+}

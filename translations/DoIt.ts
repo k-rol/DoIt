@@ -4,18 +4,14 @@
 <context>
     <name>GetterRequest</name>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="153"/>
-        <location filename="../src/GetterRequest.cpp" line="224"/>
+        <location filename="../src/GetterRequest.cpp" line="132"/>
+        <location filename="../src/GetterRequest.cpp" line="203"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="161"/>
-        <source>Unable to retrieve WhatEve request headers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/GetterRequest.cpp" line="232"/>
+        <location filename="../src/GetterRequest.cpp" line="140"/>
+        <location filename="../src/GetterRequest.cpp" line="211"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
