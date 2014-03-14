@@ -87,7 +87,7 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 
 	emit commandSent(urltostring);
 
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetReply()));
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetWhatEve()));
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
 }
