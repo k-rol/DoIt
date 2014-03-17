@@ -2,16 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>CamSettings</name>
+    <message>
+        <location filename="../assets/CamSettings.qml" line="7"/>
+        <source>Camera Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GetterRequest</name>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="149"/>
-        <location filename="../src/GetterRequest.cpp" line="220"/>
+        <location filename="../src/GetterRequest.cpp" line="145"/>
+        <location filename="../src/GetterRequest.cpp" line="216"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="157"/>
-        <location filename="../src/GetterRequest.cpp" line="228"/>
+        <location filename="../src/GetterRequest.cpp" line="153"/>
+        <location filename="../src/GetterRequest.cpp" line="224"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -30,25 +38,25 @@
     </message>
 </context>
 <context>
-    <name>main</name>
+    <name>Start</name>
     <message>
-        <location filename="../assets/main.qml" line="34"/>
+        <location filename="../assets/Start.qml" line="47"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="45"/>
-        <source>Power On</source>
+        <location filename="../assets/Start.qml" line="69"/>
+        <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="70"/>
-        <source>Power Off</source>
+        <location filename="../assets/Start.qml" line="80"/>
+        <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="116"/>
-        <source>Camera Settings</source>
+        <location filename="../assets/Start.qml" line="231"/>
+        <source>Status Bar...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

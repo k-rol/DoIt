@@ -118,6 +118,7 @@ void GetterRequest::onGetStats()
 
     QString response;
     float batteryLevel;
+    QString camMode;
 
 
     if (reply) {
@@ -130,12 +131,13 @@ void GetterRequest::onGetStats()
 
                 QString something(buffer.toHex());
                 response = something;
-                bool ok;
-                batteryLevel = buffer.toHex().mid(38,2).toInt(&ok,16);
-                qDebug() << batteryLevel;
-                batteryLevel = roundf(batteryLevel / 70 * 100);
+
+                batteryLevel = mathBattery(buffer);
+                camMode = mathMode(buffer);
+
                 qDebug() << response;
                 qDebug() << batteryLevel;
+                qDebug() << camMode;
 
             }
 
@@ -151,7 +153,7 @@ void GetterRequest::onGetStats()
         response = tr("Unable to retrieve request headers");
     }
 
-    emit statsReceived(response, batteryLevel);
+    emit statsReceived(response, batteryLevel, camMode);
 }
 //END/////////////////////
 //To get the whatever from mocky.io
@@ -223,6 +225,58 @@ void GetterRequest::onGetReply()
     }
 
     emit responseReceived(response);
+}
+
+float GetterRequest::mathBattery(QByteArray &hexCode) //
+{
+	bool ok;
+	float batteryLevel;
+	batteryLevel = hexCode.toHex().mid(38,2).toInt(&ok,16);
+	batteryLevel = roundf(batteryLevel / 76 * 100);
+	return batteryLevel;
+
+}
+
+QString GetterRequest::mathMode(QByteArray &hexCode) //
+{
+	bool ok;
+	QString camMode = "";
+	int numMode = 9;
+	numMode = hexCode.toHex().mid(3,1).toInt(&ok,10);
+
+
+	switch (numMode) {
+		case 0:
+			camMode = "Video";
+			break;
+		case 1:
+			camMode = "Picture";
+			break;
+		case 2:
+			camMode = "Burst Picture";
+			break;
+		case 3:
+			camMode = "Time Lapse";
+			break;
+		case 4:
+			camMode = "Not found";
+			break;
+		case 5:
+			camMode = "Not found";
+			break;
+		case 6:
+			camMode = "Not Found";
+			break;
+		case 7:
+			camMode = "Setup";
+			break;
+		default:
+			camMode = "Unknown";
+			break;
+	}
+
+	return camMode;
+
 }
 
 GetterRequest::~GetterRequest() {

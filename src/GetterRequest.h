@@ -24,9 +24,10 @@ public Q_SLOTS:
     void StatRequest(const QString &password, const QString &cmd);
     void whatEveRequest(const QString &rest);
 
+
 Q_SIGNALS:
     void responseReceived(const QString &info);
-    void statsReceived(const QString &info, const int &info2);
+    void statsReceived(const QString &info, const int &info2, const QString &info3);
 
     void commandSent(const QUrl &commandSent);
 
@@ -36,6 +37,8 @@ private Q_SLOTS:
 
 private:
     QNetworkAccessManager* m_networkAccessManager;
+    float mathBattery(QByteArray &hexCode);
+    QString mathMode(QByteArray &hexCode);
 };
 
 #endif

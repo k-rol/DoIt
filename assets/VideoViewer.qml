@@ -3,8 +3,6 @@ import Network.GetterRequest 1.0
 import bb.multimedia 1.0
 
 Page {
-    
-
     Container {
         layout: DockLayout {
         }
@@ -22,7 +20,7 @@ Page {
             
             }
         ]
-        
+
         ForeignWindowControl {
             verticalAlignment: VerticalAlignment.Top
             id: fwcVideoSurface
