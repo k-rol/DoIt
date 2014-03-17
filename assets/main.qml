@@ -2,6 +2,9 @@ import bb.cascades 1.2
 import Network.GetterRequest 1.0
 import bb.multimedia 1.0
 
+
+
+
 TabbedPane {
     id: thisTab
     showTabsOnActionBar: true
@@ -22,6 +25,8 @@ TabbedPane {
         }
 
     }
+    
+   
     Tab {
         id: tabStart
         title: "Main"
@@ -74,20 +79,10 @@ TabbedPane {
             source: "VideoViewer.qml"
         }
         delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        ActionBar.placement: ActionBarPlacement.InOverflow
+        //ActionBar.placement: ActionBarPlacement.InOverflow
 
     }
-    Tab {
-        id: tabVideoViewer1
-        title: "File Viewer"
-        delegate: Delegate {
-            id: delegateVideoViewer1
-            source: "VideoViewer.qml"
-        }
-        delegateActivationPolicy: TabDelegateActivationPolicy.ActivatedWhileSelected
-        ActionBar.placement: ActionBarPlacement.InOverflow
-    
-    }
+
     
     
     onCreationCompleted: {

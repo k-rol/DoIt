@@ -22,12 +22,14 @@ device {
                  $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/QmlBeam.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
-                 $$quote($$BASEDIR/src/main.cpp)
+                 $$quote($$BASEDIR/src/main.cpp) \
+                 $$quote($$BASEDIR/src/timer.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
                  $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/QmlBeam.h) \
-                 $$quote($$BASEDIR/src/applicationui.hpp)
+                 $$quote($$BASEDIR/src/applicationui.hpp) \
+                 $$quote($$BASEDIR/src/timer.h)
     }
 
     CONFIG(release, debug|release) {
@@ -50,12 +52,14 @@ device {
                  $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/QmlBeam.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
-                 $$quote($$BASEDIR/src/main.cpp)
+                 $$quote($$BASEDIR/src/main.cpp) \
+                 $$quote($$BASEDIR/src/timer.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
                  $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/QmlBeam.h) \
-                 $$quote($$BASEDIR/src/applicationui.hpp)
+                 $$quote($$BASEDIR/src/applicationui.hpp) \
+                 $$quote($$BASEDIR/src/timer.h)
     }
 }
 
@@ -80,12 +84,14 @@ simulator {
                  $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/QmlBeam.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
-                 $$quote($$BASEDIR/src/main.cpp)
+                 $$quote($$BASEDIR/src/main.cpp) \
+                 $$quote($$BASEDIR/src/timer.cpp)
 
         HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
                  $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/QmlBeam.h) \
-                 $$quote($$BASEDIR/src/applicationui.hpp)
+                 $$quote($$BASEDIR/src/applicationui.hpp) \
+                 $$quote($$BASEDIR/src/timer.h)
     }
 }
 

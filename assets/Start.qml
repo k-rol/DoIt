@@ -1,9 +1,11 @@
 import bb.cascades 1.2
 import Network.GetterRequest 1.0
+import CustomerTimer 1.0 //QTIMER TIMER class
+import QTimerLibrary 1.0 //QTIMER class
 
 Page {
     id: startpage
-    attachedObjects:
+    attachedObjects: [
     GetterRequest {
         id: getThis
         onCommandSent: {
@@ -18,7 +20,22 @@ Page {
             batteryLabel.text = info2 + "%"
             camMode.text = info3
         }
+    },
+    //SE TIMER every 10 seconds
+    Timer {
+        id: seTimer
+        accessibility.description: "sends SE requests"
+        interval: 10000
+        
+        onTimerOut: {
+            responseArea.text = "OH MY GOD it WORKS"
+        }
+    },
+    //SX TIMER every 30 seconds
+    Timer {
+        
     }
+]
      
     Container {
         layout: DockLayout {
@@ -243,5 +260,8 @@ Page {
                 visible: false
             }
         }
+    }
+    onCreationCompleted: {
+        seTimer.start()
     }
 }
