@@ -1,11 +1,9 @@
 import bb.cascades 1.2
 import Network.GetterRequest 1.0
-import CustomerTimer 1.0 //QTIMER TIMER class
-import QTimerLibrary 1.0 //QTIMER class
 
 Page {
     id: startpage
-    attachedObjects: [
+    attachedObjects:
     GetterRequest {
         id: getThis
         onCommandSent: {
@@ -20,29 +18,14 @@ Page {
             batteryLabel.text = info2 + "%"
             camMode.text = info3
         }
-    },
-    //SE TIMER every 10 seconds
-    Timer {
-        id: seTimer
-        accessibility.description: "sends SE requests"
-        interval: 10000
-        
-        onTimerOut: {
-            responseArea.text = "OH MY GOD it WORKS"
-        }
-    },
-    //SX TIMER every 30 seconds
-    Timer {
-        
     }
-]
      
     Container {
         layout: DockLayout {
         
         }
         ImageView {
-            imageSource: "asset:///backgrounds/1.jpg"
+            imageSource: "asset:///1.jpg"
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
             scalingMethod: ScalingMethod.AspectFill
@@ -69,7 +52,7 @@ Page {
                 
                 }
                 ImageView {
-                    imageSource: "asset:///images/rec.png"
+                    imageSource: "asset:///rec.png"
                     horizontalAlignment: HorizontalAlignment.Right
                     leftMargin: 0.0
                 
@@ -113,7 +96,7 @@ Page {
                     translationY: 10.0
                 }
                 ImageView {
-                    imageSource: "asset:///images/battery-full-icon4.png"
+                    imageSource: "asset:///battery-full-icon4.png"
                     scaleX: 0.75
                     scaleY: 0.75
                     translationY: -30.0
@@ -254,14 +237,10 @@ Page {
                 }    
             }
             
-            TextArea {
-                id: commandArea
-                text: "Command here."
-                visible: false
-            }
+            //TextArea {
+            //    id: commandArea
+            //    text: "Command here."
+            //}
         }
-    }
-    onCreationCompleted: {
-        seTimer.start()
     }
 }
