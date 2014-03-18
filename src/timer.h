@@ -33,7 +33,7 @@ public slots:
 	void stop();
 
 signals:
-	void timerOut();
+	void timeout();
 	void intervalChanged();
 	void activeChanged();
 

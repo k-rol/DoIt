@@ -40,22 +40,22 @@
 <context>
     <name>Start</name>
     <message>
-        <location filename="../assets/Start.qml" line="47"/>
+        <location filename="../assets/Start.qml" line="67"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="69"/>
+        <location filename="../assets/Start.qml" line="89"/>
         <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="80"/>
+        <location filename="../assets/Start.qml" line="100"/>
         <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="231"/>
+        <location filename="../assets/Start.qml" line="251"/>
         <source>Status Bar...</source>
         <translation type="unfinished"></translation>
     </message>

@@ -25,7 +25,6 @@ TabbedPane {
         }
 
     }
-    
    
     Tab {
         id: tabStart
