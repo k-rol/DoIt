@@ -30,6 +30,9 @@ GetterRequest::GetterRequest(QObject* parent)
 {
 }
 
+///////////////////////
+//To get specific info
+///////////////////////
 void GetterRequest::GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte)
 {
 	//QUrl command("%1")
@@ -65,102 +68,7 @@ void GetterRequest::GetRequest(const QString &password, const QString &cmd, cons
 	Q_UNUSED(ok);
 }
 
-///////////////////////
-//To get the stats "se"
-///////////////////////
-void GetterRequest::StatRequest(const QString &password, const QString &cmd)
-{
-	QUrl command (QString("%1%2%3").arg("http://10.5.5.9/").arg("camera/").arg(cmd));
-
-	std::ostringstream oss;
-	string passwordString = password.toUtf8().constData();
-
-	oss << "t=" << passwordString;
-	string rawString = oss.str();
-
-	QByteArray rawQuery(rawString.c_str(),rawString.length());
-
-	command.setEncodedQuery(rawQuery);
-
-	QNetworkRequest request(command);
-	QNetworkReply* response = m_networkAccessManager->get(request);
-	QString urltostring; urltostring = command.toEncoded();
-
-	emit commandSent(urltostring);
-
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
-	Q_ASSERT(ok);
-	Q_UNUSED(ok);
-}
-
-
-///////////////////////
-//To get the whatever from mocky.io
-///////////////////////
-void GetterRequest::whatEveRequest(const QString &rest)
-{
-	QUrl command (QString("%1%2").arg("http://www.mocky.io/v2/").arg(rest));
-
-	QNetworkRequest request(command);
-	QNetworkReply* response = m_networkAccessManager->get(request);
-	QString urltostring; urltostring = command.toEncoded();
-
-	emit commandSent(urltostring);
-
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
-	Q_ASSERT(ok);
-	Q_UNUSED(ok);
-}
-
-void GetterRequest::onGetStats()
-{
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-
-    QString response;
-    float batteryLevel;
-    QString camMode;
-
-
-    if (reply) {
-        if (reply->error() == QNetworkReply::NoError) {
-        	const int available = reply->bytesAvailable();
-
-            if (available > 0) {
-
-            	QByteArray buffer(reply->readAll());
-
-                QString something(buffer.toHex());
-                response = something;
-
-                batteryLevel = mathBattery(buffer);
-                camMode = mathMode(buffer);
-
-                qDebug() << response;
-                qDebug() << batteryLevel;
-                qDebug() << camMode;
-
-            }
-
-        } else {
-            response =  tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString());
-            qDebug() << response;
-        }
-
-        reply->deleteLater();
-    }
-
-    if (response.trimmed().isEmpty()) {
-        response = tr("Unable to retrieve request headers");
-    }
-
-    emit statsReceived(response, batteryLevel, camMode);
-}
-//END/////////////////////
-//To get the whatever from mocky.io
-//END/////////////////////
-
-
-
+///Get Response
 void GetterRequest::onGetReply()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
@@ -226,7 +134,107 @@ void GetterRequest::onGetReply()
 
     emit responseReceived(response);
 }
+//END/////////////////////
+//To get specific info
+//END/////////////////////
 
+///////////////////////
+//To get the whatever from mocky.io
+///////////////////////
+void GetterRequest::whatEveRequest(const QString &rest)
+{
+	QUrl command (QString("%1%2").arg("http://www.mocky.io/v2/").arg(rest));
+
+	QNetworkRequest request(command);
+	QNetworkReply* response = m_networkAccessManager->get(request);
+	QString urltostring; urltostring = command.toEncoded();
+
+	emit commandSent(urltostring);
+
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
+	Q_ASSERT(ok);
+	Q_UNUSED(ok);
+}
+//END/////////////////////
+//To get the whatever from mocky.io
+//END/////////////////////
+
+///////////////////////
+//To get the stats "se"
+///////////////////////
+void GetterRequest::StatRequest(const QString &password, const QString &cmd)
+{
+	QUrl command (QString("%1%2%3").arg("http://10.5.5.9/").arg("camera/").arg(cmd));
+
+	std::ostringstream oss;
+	string passwordString = password.toUtf8().constData();
+
+	oss << "t=" << passwordString;
+	string rawString = oss.str();
+
+	QByteArray rawQuery(rawString.c_str(),rawString.length());
+
+	command.setEncodedQuery(rawQuery);
+
+	QNetworkRequest request(command);
+	QNetworkReply* response = m_networkAccessManager->get(request);
+	QString urltostring; urltostring = command.toEncoded();
+
+	emit commandSent(urltostring);
+
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
+	Q_ASSERT(ok);
+	Q_UNUSED(ok);
+}
+
+///Get Response
+void GetterRequest::onGetStats()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+    QString response;
+    float batteryLevel;
+    QString camMode;
+
+
+    if (reply) {
+        if (reply->error() == QNetworkReply::NoError) {
+        	const int available = reply->bytesAvailable();
+
+            if (available > 0) {
+
+            	QByteArray buffer(reply->readAll());
+
+                QString something(buffer.toHex());
+                response = something;
+
+                batteryLevel = mathBattery(buffer);
+                camMode = mathMode(buffer);
+
+                qDebug() << response;
+                qDebug() << batteryLevel;
+                qDebug() << camMode;
+
+            }
+
+        } else {
+            response =  tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString());
+            qDebug() << response;
+        }
+
+        reply->deleteLater();
+    }
+
+    if (response.trimmed().isEmpty()) {
+        response = tr("Unable to retrieve request headers");
+    }
+
+    emit statsReceived(response, batteryLevel, camMode);
+}
+
+//Elements of SE STATS://
+
+///Get battery percentage level
 float GetterRequest::mathBattery(QByteArray &hexCode) //
 {
 	bool ok;
@@ -237,6 +245,7 @@ float GetterRequest::mathBattery(QByteArray &hexCode) //
 
 }
 
+//Get camera mode (photo-video-burst-time)
 QString GetterRequest::mathMode(QByteArray &hexCode) //
 {
 	bool ok;
@@ -279,6 +288,72 @@ QString GetterRequest::mathMode(QByteArray &hexCode) //
 
 }
 
+//END/////////////////////
+//To get the stats "se"
+//END/////////////////////
+
+///////////////////////
+//Get password at start
+///////////////////////
+void GetterRequest::GetPassword()
+{
+	const QString ipAddress = "http://10.5.5.9/";
+	const QString cmd = "sd";
+
+	QUrl command (QString("%1%2%3").arg(ipAddress).arg("bacpac/").arg(cmd));
+
+	QNetworkRequest request(command);
+	QNetworkReply* response = m_networkAccessManager->get(request);
+
+	qDebug() << "GetPassword";
+	qDebug() << command;
+
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
+	Q_ASSERT(ok);
+	Q_UNUSED(ok);
+}
+
+///On Get Password Response
+void GetterRequest::onGetPassword()
+{
+	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+
+	if (reply)	{
+		if(reply->error() == QNetworkReply::NoError) {
+			const int available = reply->bytesAvailable();
+
+
+			if (available > 0) {
+				QByteArray buffer(reply->readAll());
+				//QString byteString(buffer);
+				QString something(buffer);
+				QString testies = QString::fromAscii(buffer,-1);
+
+				qDebug() << "onGetPassword";
+				qDebug() << something;
+				qDebug() << something.toUtf8();
+				qDebug() << testies;
+
+
+			}
+		}
+
+		else {
+			QString response = tr("Error: %1 Status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString());
+			qDebug() << response;
+		}
+
+		reply->deleteLater();
+	}
+
+
+}
+//END/////////////////////
+//Get password at start
+//END/////////////////////
+
+//Desctructor
 GetterRequest::~GetterRequest() {
 	// TODO Auto-generated destructor stub
 }

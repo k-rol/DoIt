@@ -25,7 +25,7 @@ Page {
         id: sxTimer
         interval: 35000
         onTimeout: {
-            responseArea.text = "OH MY GOD"
+            getThis.StatRequest(doitsettings.getSettings("password"),"sx")
         
         }
     }
@@ -36,10 +36,10 @@ Page {
         //SE TIMER every 10 seconds
         Timer {
             id: seTimer
-            interval: 10000
+            interval: 5000
             
             onTimeout: {
-                responseArea.text = "OH MY GOD it WORKS"
+                getThis.StatRequest(doitsettings.getSettings("password"),"se")
             }
             visible: false
         }
@@ -265,7 +265,7 @@ Page {
         }
     }
     onCreationCompleted: {
-        seTimer.start()
-        sxTimer.start()
+        //seTimer.start()
+        //sxTimer.start()
     }
 }

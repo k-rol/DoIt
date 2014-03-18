@@ -82,10 +82,14 @@ TabbedPane {
 
     }
 
-    
-    
+    attachedObjects: [
+        GetterRequest {
+            id: getThis
+        }
+]
     onCreationCompleted: {
       Application.thumbnail.connect(onMinimized)
+      getThis.GetPassword();
       }
     
     function onMinimized()
