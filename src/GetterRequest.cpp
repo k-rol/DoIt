@@ -21,12 +21,14 @@
 #include <QUrl>
 #include <math.h>
 #include <QSettings>
+#include <QPointer>
 
 using namespace std;
 
 GetterRequest::GetterRequest(QObject* parent)
     : QObject(parent)
     , m_networkAccessManager(new QNetworkAccessManager(this))
+	, qPointer()
 {
 }
 
@@ -305,29 +307,43 @@ void GetterRequest::GetPassword()
 	QNetworkRequest request(command);
 	QNetworkReply* response = m_networkAccessManager->get(request);
 
+	qPointer = m_networkAccessManager->get(request);
+
+
+
 	qDebug() << "GetPassword";
 	qDebug() << command;
 
-	//timerTimeout(reponse);
+
 
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
 }
 
-/*void timerTimeout(QNetworkReply* &m_reply)
+void timerReply()
+{
+
+}
+
+/*void timerTimeout()
 {
     QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(outOfTime(m_reply)));
+    connect(timer, SIGNAL(timeout()), this, SLOT(outOfTime()));
     timer->interval() = 3000;
     timer->start();
 
-}*/
+}
 
-void outOfTime(QNetworkReply* &m_reply)
+void outOfTime()
 {
 	qDebug() << "oh yeah abort baby" ;
 	m_reply->abort();
+}*/
+
+void abortReply()
+{
+	qPointer->abort;
 }
 
 ///On Get Password Response

@@ -12,19 +12,19 @@
 <context>
     <name>GetterRequest</name>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="124"/>
-        <location filename="../src/GetterRequest.cpp" line="221"/>
+        <location filename="../src/GetterRequest.cpp" line="126"/>
+        <location filename="../src/GetterRequest.cpp" line="223"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="132"/>
-        <location filename="../src/GetterRequest.cpp" line="229"/>
+        <location filename="../src/GetterRequest.cpp" line="134"/>
+        <location filename="../src/GetterRequest.cpp" line="231"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="363"/>
+        <location filename="../src/GetterRequest.cpp" line="379"/>
         <source>Error: %1 Status: %2</source>
         <translation type="unfinished"></translation>
     </message>
