@@ -30,8 +30,9 @@ public Q_SLOTS:
 Q_SIGNALS:
     void responseReceived(const QString &info);
     void statsReceived(const QString &info, const int &info2, const QString &info3);
-
+    void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
+    //void outOfTime(QNetworkReply* &m_reply);
 
 
 private Q_SLOTS:
@@ -43,6 +44,8 @@ private:
     QNetworkAccessManager* m_networkAccessManager;
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
+    //QNetworkReply* m_reply;
+    //void timerTimeout(QNetworkReply* &m_reply);
 };
 
 #endif

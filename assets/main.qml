@@ -89,7 +89,7 @@ TabbedPane {
 ]
     onCreationCompleted: {
       Application.thumbnail.connect(onMinimized)
-      getThis.GetPassword();
+               
       }
     
     function onMinimized()

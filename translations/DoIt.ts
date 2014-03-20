@@ -24,7 +24,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="343"/>
+        <location filename="../src/GetterRequest.cpp" line="363"/>
         <source>Error: %1 Status: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,23 +45,23 @@
 <context>
     <name>Start</name>
     <message>
-        <location filename="../assets/Start.qml" line="67"/>
+        <location filename="../assets/Start.qml" line="72"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="89"/>
+        <location filename="../assets/Start.qml" line="94"/>
         <source>On</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="100"/>
+        <location filename="../assets/Start.qml" line="105"/>
         <source>Off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="251"/>
-        <source>Status Bar...</source>
+        <location filename="../assets/Start.qml" line="256"/>
+        <source>Not Connected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

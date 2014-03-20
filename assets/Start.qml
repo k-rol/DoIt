@@ -20,6 +20,10 @@ Page {
             batteryLabel.text = info2 + "%"
             camMode.text = info3
         }
+        onPasswordReceived: {
+            seTimer.start()
+            responseArea.text = "Connecting..."
+        }
     },
     QTimer {
         id: sxTimer
@@ -40,6 +44,7 @@ Page {
             
             onTimeout: {
                 getThis.StatRequest(doitsettings.getSettings("password"),"se")
+                console.debug("seTimer")
             }
             visible: false
         }
@@ -105,7 +110,7 @@ Page {
                 }
                 Label {
                     id: labelConnection
-                    text: "Connected"
+                    text: "  Hero3 White"
                     translationY: 10.0
                     translationX: 20.0
                 }
@@ -248,7 +253,7 @@ Page {
 
                 TextArea {
                     id: responseArea
-                    text: qsTr("Status Bar...")
+                    text: qsTr("Not Connected")
                     onTextChanged: {
                         activeFrame.update(responseArea.text)
                     }
@@ -265,6 +270,7 @@ Page {
         }
     }
     onCreationCompleted: {
+        getThis.GetPassword()
         //seTimer.start()
         //sxTimer.start()
     }

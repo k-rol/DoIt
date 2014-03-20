@@ -20,7 +20,7 @@
 #include <sstream>
 #include <QUrl>
 #include <math.h>
-
+#include <QSettings>
 
 using namespace std;
 
@@ -308,9 +308,26 @@ void GetterRequest::GetPassword()
 	qDebug() << "GetPassword";
 	qDebug() << command;
 
+	//timerTimeout(reponse);
+
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
+}
+
+/*void timerTimeout(QNetworkReply* &m_reply)
+{
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(outOfTime(m_reply)));
+    timer->interval() = 3000;
+    timer->start();
+
+}*/
+
+void outOfTime(QNetworkReply* &m_reply)
+{
+	qDebug() << "oh yeah abort baby" ;
+	m_reply->abort();
 }
 
 ///On Get Password Response
@@ -318,6 +335,7 @@ void GetterRequest::onGetPassword()
 {
 	QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
+	QByteArray hexToPassword = "";
 
 	if (reply)	{
 		if(reply->error() == QNetworkReply::NoError) {
@@ -325,17 +343,19 @@ void GetterRequest::onGetPassword()
 
 
 			if (available > 0) {
-				QByteArray buffer(reply->readAll());
-				//QString byteString(buffer);
-				QString something(buffer);
-				QString testies = QString::fromAscii(buffer,-1);
+				QByteArray buffer(reply->readAll().toHex());
+
+				//QString myCustomData = reply->property("mycustomdata").toString();
+
+				hexToPassword = QByteArray::fromHex(buffer.right(buffer.length()-4));
 
 				qDebug() << "onGetPassword";
-				qDebug() << something;
-				qDebug() << something.toUtf8();
-				qDebug() << testies;
 
+				qDebug() << hexToPassword.data();
 
+				QSettings settings;
+				settings.setValue("password", hexToPassword);
+				emit passwordReceived(hexToPassword.data());
 			}
 		}
 
@@ -353,7 +373,11 @@ void GetterRequest::onGetPassword()
 //Get password at start
 //END/////////////////////
 
-//Desctructor
+//Destructor
 GetterRequest::~GetterRequest() {
-	// TODO Auto-generated destructor stub
+	delete m_networkAccessManager;
+
+	//Delete password from phone's memory
+	QSettings settings;
+	settings.remove("password");
 }
