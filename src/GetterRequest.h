@@ -21,6 +21,7 @@ public:
     GetterRequest(QObject* parent = 0);
     virtual ~GetterRequest();
 
+
 public Q_SLOTS:
     void GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte);
     void StatRequest(const QString &password, const QString &cmd);
@@ -34,23 +35,21 @@ Q_SIGNALS:
     void statsReceived(const QString &info, const int &info2, const QString &info3);
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
-    //void outOfTime();
 
 
 private Q_SLOTS:
     void onGetReply();
     void onGetStats();
     void onGetPassword();
+    void timerReply();
 
 private:
-    QNetworkReply* qPointer;
     QNetworkAccessManager* m_networkAccessManager;
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
-    void timerReply();
+    QNetworkReply* replyPointer;
 
-    //QNetworkReply* m_reply;
-    //void timerTimeout();
+
 };
 
 #endif

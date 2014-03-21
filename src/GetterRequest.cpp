@@ -22,13 +22,13 @@
 #include <math.h>
 #include <QSettings>
 #include <QPointer>
+#include <QTimer>
 
 using namespace std;
 
 GetterRequest::GetterRequest(QObject* parent)
     : QObject(parent)
     , m_networkAccessManager(new QNetworkAccessManager(this))
-	, qPointer()
 {
 }
 
@@ -307,22 +307,31 @@ void GetterRequest::GetPassword()
 	QNetworkRequest request(command);
 	QNetworkReply* response = m_networkAccessManager->get(request);
 
-	qPointer = m_networkAccessManager->get(request);
-
-
+	replyPointer = response;
 
 	qDebug() << "GetPassword";
 	qDebug() << command;
 
-
+	QTimer* timer = new QTimer(this);
+	timer->setSingleShot(true);
+	timer->start(3000);
 
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
+	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(timerReply()));
+
+
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
+	Q_ASSERT(ok2);
+	Q_UNUSED(ok2);
 }
 
-void timerReply()
+void GetterRequest::timerReply()
 {
+	qDebug() << "It PASSED!!!";
+
+	replyPointer->close();
+	replyPointer->deleteLater();
 
 }
 
@@ -341,10 +350,10 @@ void outOfTime()
 	m_reply->abort();
 }*/
 
-void abortReply()
+/*void abortReply()
 {
 	qPointer->abort;
-}
+}*/
 
 ///On Get Password Response
 void GetterRequest::onGetPassword()
