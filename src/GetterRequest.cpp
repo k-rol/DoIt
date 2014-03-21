@@ -21,7 +21,6 @@
 #include <QUrl>
 #include <math.h>
 #include <QSettings>
-#include <QPointer>
 #include <QTimer>
 
 using namespace std;
@@ -185,8 +184,20 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 	emit commandSent(urltostring);
 
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
+
+	QEventLoop loop;
+	replyStatsPointer = response;
+	QTimer* timer = new QTimer(this);
+	timer->setSingleShot(true);
+	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(statsReplyTimer()));
+	timer->start(3000);
+	//loop.exec;
+
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
+	Q_ASSERT(ok2);
+	Q_UNUSED(ok2);
+
 }
 
 ///Get Response
@@ -307,17 +318,16 @@ void GetterRequest::GetPassword()
 	QNetworkRequest request(command);
 	QNetworkReply* response = m_networkAccessManager->get(request);
 
-	replyPointer = response;
-
 	qDebug() << "GetPassword";
 	qDebug() << command;
 
+	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
+
+	replyPWPointer = response;
 	QTimer* timer = new QTimer(this);
 	timer->setSingleShot(true);
 	timer->start(3000);
-
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
-	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(timerReply()));
+	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(passwordReplyTimer()));
 
 
 	Q_ASSERT(ok);
@@ -325,35 +335,6 @@ void GetterRequest::GetPassword()
 	Q_ASSERT(ok2);
 	Q_UNUSED(ok2);
 }
-
-void GetterRequest::timerReply()
-{
-	qDebug() << "It PASSED!!!";
-
-	replyPointer->close();
-	replyPointer->deleteLater();
-
-}
-
-/*void timerTimeout()
-{
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(outOfTime()));
-    timer->interval() = 3000;
-    timer->start();
-
-}
-
-void outOfTime()
-{
-	qDebug() << "oh yeah abort baby" ;
-	m_reply->abort();
-}*/
-
-/*void abortReply()
-{
-	qPointer->abort;
-}*/
 
 ///On Get Password Response
 void GetterRequest::onGetPassword()
@@ -397,6 +378,37 @@ void GetterRequest::onGetPassword()
 //END/////////////////////
 //Get password at start
 //END/////////////////////
+
+///////////////////////
+//SLOT called by QNetworkAccessManager
+//requests for timeouts
+///////////////////////
+void GetterRequest::passwordReplyTimer()
+{
+	qDebug() << "Password request aborted";
+
+	replyPWPointer->abort();
+	replyPWPointer->deleteLater();
+
+}
+
+void GetterRequest::statsReplyTimer()
+{
+	qDebug() << "Stats request aborting...";
+
+		if (replyStatsPointer->isRunning() == true)
+	{
+		replyStatsPointer->close();
+		//replyStatsPointer->deleteLater();
+		qDebug() << "Aborted";
+	}
+}
+
+//END/////////////////////
+//SLOT called by QNetworkAccessManager
+//requests for timeouts
+//END/////////////////////
+
 
 //Destructor
 GetterRequest::~GetterRequest() {

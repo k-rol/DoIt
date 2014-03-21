@@ -41,13 +41,15 @@ private Q_SLOTS:
     void onGetReply();
     void onGetStats();
     void onGetPassword();
-    void timerReply();
+    void passwordReplyTimer();
+    void statsReplyTimer();
 
 private:
     QNetworkAccessManager* m_networkAccessManager;
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
-    QNetworkReply* replyPointer;
+    QNetworkReply* replyStatsPointer;
+    QNetworkReply* replyPWPointer;
 
 
 };
