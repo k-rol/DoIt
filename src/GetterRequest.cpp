@@ -23,6 +23,7 @@
 #include <QSettings>
 #include <QTimer>
 
+
 using namespace std;
 
 GetterRequest::GetterRequest(QObject* parent)
@@ -185,13 +186,12 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
 
-	QEventLoop loop;
-	replyStatsPointer = response;
-	QTimer* timer = new QTimer(this);
+
+	QTimer* timer = new QTimer(response);
 	timer->setSingleShot(true);
-	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(statsReplyTimer()));
+	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
 	timer->start(3000);
-	//loop.exec;
+
 
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
@@ -323,12 +323,10 @@ void GetterRequest::GetPassword()
 
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
 
-	replyPWPointer = response;
-	QTimer* timer = new QTimer(this);
+	QTimer* timer = new QTimer(response);
 	timer->setSingleShot(true);
 	timer->start(3000);
-	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(passwordReplyTimer()));
-
+	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
 
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
@@ -383,25 +381,18 @@ void GetterRequest::onGetPassword()
 //SLOT called by QNetworkAccessManager
 //requests for timeouts
 ///////////////////////
-void GetterRequest::passwordReplyTimer()
-{
-	qDebug() << "Password request aborted";
-
-	replyPWPointer->abort();
-	replyPWPointer->deleteLater();
-
-}
-
-void GetterRequest::statsReplyTimer()
+void GetterRequest::stopReplyTimer()
 {
 	qDebug() << "Stats request aborting...";
+	QTimer* timer = qobject_cast<QTimer*>(sender());
 
-		if (replyStatsPointer->isRunning() == true)
-	{
-		replyStatsPointer->close();
-		//replyStatsPointer->deleteLater();
-		qDebug() << "Aborted";
-	}
+	QNetworkReply* response = qobject_cast<QNetworkReply*>(timer->parent());
+
+	response->abort();
+	//replyStatsPointer->close();
+	//replyStatsPointer->deleteLater();
+	qDebug() << "Aborted";
+
 }
 
 //END/////////////////////
@@ -415,6 +406,6 @@ GetterRequest::~GetterRequest() {
 	delete m_networkAccessManager;
 
 	//Delete password from phone's memory
-	QSettings settings;
-	settings.remove("password");
+	//QSettings settings;
+	//settings.remove("password");
 }
