@@ -1,5 +1,5 @@
 1
-15
+17
 About.qml
 backgrounds/1.jpg
 CamSettings.qml
@@ -9,9 +9,11 @@ images/battery-full-icon0.png
 images/battery-full-icon1.png
 images/battery-full-icon2.png
 images/battery-full-icon4.png
+images/dialogframe.png
 images/rec.png
 LivePreview.qml
 main.qml
+RetryConnectionDialog.qml
 Settings.qml
 Start.qml
 VideoViewer.qml

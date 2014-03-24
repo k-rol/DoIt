@@ -11,8 +11,6 @@
 #include <QObject>
 
 class QNetworkAccessManager;
-class QNetworkReply;
-
 
 class GetterRequest : public QObject
 {
@@ -26,6 +24,7 @@ public Q_SLOTS:
     void GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte);
     void StatRequest(const QString &password, const QString &cmd);
     void GetPassword();
+    void startTimer();
 
     void whatEveRequest(const QString &rest);
 
@@ -35,6 +34,8 @@ Q_SIGNALS:
     void statsReceived(const QString &info, const int &info2, const QString &info3);
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
+    void timerTimesOut(const QString &requestName);
+    void reStartTimerSignal();
 
 
 private Q_SLOTS:
@@ -48,8 +49,6 @@ private:
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
     //QNetworkReply* replyStatsPointer;
-
-
 
 };
 

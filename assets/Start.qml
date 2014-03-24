@@ -12,6 +12,7 @@ Page {
             commandArea.text = commandSent;
         }
         onResponseReceived: {
+            
             responseArea.text = info;
         
         }
@@ -24,6 +25,15 @@ Page {
             seTimer.start()
             responseArea.text = "Connecting..."
         }
+        onTimerTimesOut: {
+            retryDialog.open()
+            seTimer.stop()
+                //sxTimer.stop()
+        }
+        onReStartTimerSignal: {
+            GetPassword();
+        }
+        
     },
     QTimer {
         id: sxTimer
@@ -32,6 +42,9 @@ Page {
             getThis.StatRequest(doitsettings.getSettings("password"),"sx")
         
         }
+    },
+    RetryConnectionDialog {
+        id: retryDialog
     }
 ]
      
@@ -45,6 +58,10 @@ Page {
             onTimeout: {
                 getThis.StatRequest(doitsettings.getSettings("password"),"se")
                 console.debug("seTimer")
+                if (responseArea.text = "Connecting...")
+                {
+                    responseArea.text = "Connected!"
+                }
             }
             visible: false
         }
@@ -90,7 +107,19 @@ Page {
                     orientation: LayoutOrientation.LeftToRight
                 
                 }
-                Button {
+                ToggleButton {
+                    checked: false
+                    onCheckedChanged: {
+                        if (checked == true){
+                            getThis.GetRequest(doitsettings.getSettings("password"), "PW", "01");
+                        }
+                        else {
+                            getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00");
+                        }
+                    }
+
+                }
+                /*                Button {
                     text: qsTr("On") + Retranslate.onLocaleOrLanguageChanged
                     
                     onClicked: {
@@ -107,7 +136,8 @@ Page {
                         getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00")                
                     }
                     preferredWidth: 10.0
-                }
+                }*/
+
                 Label {
                     id: labelConnection
                     text: "  Hero3 White"
@@ -271,7 +301,6 @@ Page {
     }
     onCreationCompleted: {
         getThis.GetPassword()
-        //seTimer.start()
-        //sxTimer.start()
+
     }
 }

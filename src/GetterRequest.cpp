@@ -383,18 +383,21 @@ void GetterRequest::onGetPassword()
 ///////////////////////
 void GetterRequest::stopReplyTimer()
 {
-	qDebug() << "Stats request aborting...";
+	qDebug() << "request aborting...";
 	QTimer* timer = qobject_cast<QTimer*>(sender());
 
 	QNetworkReply* response = qobject_cast<QNetworkReply*>(timer->parent());
-
+	emit timerTimesOut("neverconnected");
 	response->abort();
-	//replyStatsPointer->close();
-	//replyStatsPointer->deleteLater();
 	qDebug() << "Aborted";
 
 }
 
+void GetterRequest::startTimer()
+{
+	qDebug() << "restard timer...";
+	emit reStartTimerSignal();
+}
 //END/////////////////////
 //SLOT called by QNetworkAccessManager
 //requests for timeouts
