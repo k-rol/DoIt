@@ -48,6 +48,7 @@ private:
     QNetworkAccessManager* m_networkAccessManager;
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
+    int passwordCounter;
     //QNetworkReply* replyStatsPointer;
 
 };

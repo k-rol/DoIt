@@ -30,6 +30,7 @@ GetterRequest::GetterRequest(QObject* parent)
     : QObject(parent)
     , m_networkAccessManager(new QNetworkAccessManager(this))
 {
+	passwordCounter = 0;
 }
 
 ///////////////////////
@@ -324,6 +325,7 @@ void GetterRequest::GetPassword()
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
 
 	QTimer* timer = new QTimer(response);
+	timer->setObjectName("password");
 	timer->setSingleShot(true);
 	timer->start(3000);
 	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
@@ -360,6 +362,8 @@ void GetterRequest::onGetPassword()
 				QSettings settings;
 				settings.setValue("password", hexToPassword);
 				emit passwordReceived(hexToPassword.data());
+
+				passwordCounter = 0; //Reset password Counter
 			}
 		}
 
@@ -383,8 +387,11 @@ void GetterRequest::onGetPassword()
 ///////////////////////
 void GetterRequest::stopReplyTimer()
 {
-	qDebug() << "request aborting...";
 	QTimer* timer = qobject_cast<QTimer*>(sender());
+
+	qDebug() << "request aborting...";
+	qDebug() << timer->objectName();
+
 
 	QNetworkReply* response = qobject_cast<QNetworkReply*>(timer->parent());
 	emit timerTimesOut("neverconnected");
