@@ -59,8 +59,8 @@ Dialog {
                         text: "Retry"
                         preferredWidth: 262.0
                         onClicked: {
-                        	getThis.startTimer()
-                            retryDialog.close()
+                        	getThis.GetPassword()
+                        	retryDialog.close()
                         }
                     }
                     Button {

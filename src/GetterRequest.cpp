@@ -394,24 +394,33 @@ void GetterRequest::stopReplyTimer()
 	qDebug() << "request aborting...";
 	qDebug() << timer->objectName();
 
+	response->abort();
+	qDebug() << "Aborted";
+
 	if (timer->objectName() == "GetPassword")
 	{
 		if (passwordCounter == 3)
 		{
 			//stop timer and bring retry dialog
-			//emit passwordfailedDialog();
+			emit passwordfailedDialog();
+			emit timerTimesOut("GetPassword");
 		}
 
-		passwordCounter++;
+		else {
+			passwordCounter++;
+			//retry get password timer
+			GetPassword();
+		}
 	}
 
 	else if (timer->objectName() == "StatRequest") {
-
+		//emit timerTimesOut("neverconected");
+		//powerbutton at off
 	}
 
-	emit timerTimesOut("neverconected");
-	response->abort();
-	qDebug() << "Aborted";
+
+
+
 
 }
 

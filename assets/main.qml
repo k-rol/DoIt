@@ -14,7 +14,7 @@ TabbedPane {
         }
         settingsAction: SettingsActionItem {
             onTriggered: {
-                settings.open()
+                 settings.open()
             }
         }
         actions: ActionItem {

@@ -35,6 +35,7 @@ Q_SIGNALS:
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
     void timerTimesOut(const QString &requestName);
+    void passwordfailedDialog();
     void reStartTimerSignal();
 
 

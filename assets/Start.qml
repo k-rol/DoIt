@@ -26,12 +26,14 @@ Page {
             responseArea.text = "Connecting..."
         }
         onTimerTimesOut: {
-            retryDialog.open()
             seTimer.stop()
-                //sxTimer.stop()
+            //sxTimer.stop()
         }
         onReStartTimerSignal: {
             GetPassword();
+        }
+        onPasswordfailedDialog: {
+            retryDialog.open()
         }
         
     },
