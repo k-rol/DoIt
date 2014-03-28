@@ -189,6 +189,7 @@ void GetterRequest::StatRequest(const QString &password, const QString &cmd)
 
 
 	QTimer* timer = new QTimer(response);
+	timer->setObjectName("StatRequest");
 	timer->setSingleShot(true);
 	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
 	timer->start(3000);
@@ -325,7 +326,7 @@ void GetterRequest::GetPassword()
 	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetPassword()));
 
 	QTimer* timer = new QTimer(response);
-	timer->setObjectName("password");
+	timer->setObjectName("GetPassword");
 	timer->setSingleShot(true);
 	timer->start(3000);
 	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
@@ -388,13 +389,27 @@ void GetterRequest::onGetPassword()
 void GetterRequest::stopReplyTimer()
 {
 	QTimer* timer = qobject_cast<QTimer*>(sender());
+	QNetworkReply* response = qobject_cast<QNetworkReply*>(timer->parent());
 
 	qDebug() << "request aborting...";
 	qDebug() << timer->objectName();
 
+	if (timer->objectName() == "GetPassword")
+	{
+		if (passwordCounter == 3)
+		{
+			//stop timer and bring retry dialog
+			//emit passwordfailedDialog();
+		}
 
-	QNetworkReply* response = qobject_cast<QNetworkReply*>(timer->parent());
-	emit timerTimesOut("neverconnected");
+		passwordCounter++;
+	}
+
+	else if (timer->objectName() == "StatRequest") {
+
+	}
+
+	emit timerTimesOut("neverconected");
 	response->abort();
 	qDebug() << "Aborted";
 
@@ -402,7 +417,7 @@ void GetterRequest::stopReplyTimer()
 
 void GetterRequest::startTimer()
 {
-	qDebug() << "restard timer...";
+	qDebug() << "restart timer...";
 	emit reStartTimerSignal();
 }
 //END/////////////////////
