@@ -30,7 +30,7 @@ GetterRequest::GetterRequest(QObject* parent)
     : QObject(parent)
     , m_networkAccessManager(new QNetworkAccessManager(this))
 {
-	passwordCounter = 0;
+	passwordCounter = 1;
 }
 
 ///////////////////////
@@ -403,7 +403,7 @@ void GetterRequest::stopReplyTimer()
 		{
 			//stop timer and bring retry dialog
 			emit passwordfailedDialog();
-			emit timerTimesOut("GetPassword");
+			//emit timerTimesOut("GetPassword");
 		}
 
 		else {
@@ -418,7 +418,7 @@ void GetterRequest::stopReplyTimer()
 		//powerbutton at off
 	}
 
-
+	qDebug() << passwordCounter;
 
 
 
@@ -437,7 +437,7 @@ void GetterRequest::startTimer()
 
 //Destructor
 GetterRequest::~GetterRequest() {
-	delete m_networkAccessManager;
+	//delete m_networkAccessManager;
 
 	//Delete password from phone's memory
 	//QSettings settings;
