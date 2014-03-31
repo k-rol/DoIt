@@ -35,6 +35,10 @@ Page {
         onPasswordfailedDialog: {
             retryDialog.open()
         }
+        onSignalGetPassword: {
+            if (counts != 3)
+                GetPassword()
+        }
         
     },
     QTimer {

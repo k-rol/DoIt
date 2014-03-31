@@ -6,7 +6,7 @@
  */
 
 #include "GetterRequest.h"
-
+#include "RetryCounter.h"
 
 
 #include <bb/data/JsonDataAccess>
@@ -329,7 +329,8 @@ void GetterRequest::GetPassword()
 	timer->setObjectName("GetPassword");
 	timer->setSingleShot(true);
 	timer->start(3000);
-	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
+	RetryCounter counterClass;
+	bool ok2 = connect(timer, SIGNAL(timeout()),counterClass,SLOT(stopReplyTimer()));
 
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
@@ -409,7 +410,7 @@ void GetterRequest::stopReplyTimer()
 		else {
 			passwordCounter++;
 			//retry get password timer
-			GetPassword();
+			emit signalGetPassword(passwordCounter);
 		}
 	}
 
@@ -429,6 +430,8 @@ void GetterRequest::startTimer()
 	qDebug() << "restart timer...";
 	emit reStartTimerSignal();
 }
+
+
 //END/////////////////////
 //SLOT called by QNetworkAccessManager
 //requests for timeouts
@@ -438,7 +441,7 @@ void GetterRequest::startTimer()
 //Destructor
 GetterRequest::~GetterRequest() {
 	//delete m_networkAccessManager;
-
+	qDebug() << "*******GETTERREQUEST DESTROYED?********";
 	//Delete password from phone's memory
 	//QSettings settings;
 	//settings.remove("password");

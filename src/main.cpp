@@ -26,6 +26,7 @@
 
 #include "GetterRequest.h"
 #include "timer.h"
+#include "RetryCounter.h"
 
 
 
