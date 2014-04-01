@@ -24,7 +24,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="373"/>
+        <location filename="../src/GetterRequest.cpp" line="376"/>
         <source>Error: %1 Status: %2</source>
         <translation type="unfinished"></translation>
     </message>
