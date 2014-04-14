@@ -37,7 +37,7 @@ Q_SIGNALS:
     void timerTimesOut(const QString &requestName);
     void passwordfailedDialog();
     void reStartTimerSignal();
-    void signalGetPassword(int &counts);
+    void signalGetPassword();
 
 
 private Q_SLOTS:

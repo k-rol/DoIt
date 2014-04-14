@@ -36,8 +36,11 @@ Page {
             retryDialog.open()
         }
         onSignalGetPassword: {
-            if (counts != 3)
+            var  pcount = doitsettings.getSettings("GetPassword")
+            if (pcount != 3) {
+            	doitsettings.setSettings("GetPassword", pcount++)
                 GetPassword()
+            }
         }
         
     },
@@ -306,7 +309,14 @@ Page {
         }
     }
     onCreationCompleted: {
+        //getThis.GetPassword()
+        getPasswordwithCounter()
+    }
+    
+    //GetPassword with Counter up to 3 times
+    function getPasswordwithCounter()
+    {
+        doitsettings.setSettings("counter", 1)
         getThis.GetPassword()
-
     }
 }

@@ -330,15 +330,14 @@ void GetterRequest::GetPassword()
 	timer->setSingleShot(true);
 	timer->start(3000);
 	RetryCounter counterClass;
-	//bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
-	bool ok3 = connect(timer, SIGNAL(timeout()),&counterClass,SLOT(stopReplyTimer()));
+	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
+	//bool ok2 = connect(timer, SIGNAL(timeout()),&counterClass,SLOT(stopReplyTimer()));
 
 	Q_ASSERT(ok);
 	Q_UNUSED(ok);
-	//Q_ASSERT(ok2);
-	//Q_UNUSED(ok2);
-	Q_ASSERT(ok3);
-	Q_UNUSED(ok3);
+	Q_ASSERT(ok2);
+	Q_UNUSED(ok2);
+
 }
 
 ///On Get Password Response
@@ -403,28 +402,14 @@ void GetterRequest::stopReplyTimer()
 
 	if (timer->objectName() == "GetPassword")
 	{
-		if (passwordCounter == 3)
-		{
-			//stop timer and bring retry dialog
-			emit passwordfailedDialog();
-			//emit timerTimesOut("GetPassword");
-		}
+		emit signalGetPassword();
 
-		else {
-			passwordCounter++;
-			//retry get password timer
-			emit signalGetPassword(passwordCounter);
-		}
 	}
 
 	else if (timer->objectName() == "StatRequest") {
 		//emit timerTimesOut("neverconected");
 		//powerbutton at off
 	}
-
-	qDebug() << passwordCounter;
-
-
 
 }
 
