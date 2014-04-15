@@ -20,14 +20,10 @@
 #include <QTranslator>
 #include "applicationui.hpp"
 
-
-
 #include <Qt/qdeclarativedebug.h>
 
 #include "GetterRequest.h"
 #include "timer.h"
-#include "RetryCounter.h"
-
 
 using namespace bb::cascades;
 
