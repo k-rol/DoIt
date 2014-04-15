@@ -2,10 +2,15 @@ import bb.cascades 1.2
 import Network.GetterRequest 1.0
 import CustomerTimer 1.0 //QTIMER TIMER class
 import QTimerLibrary 1.0 //QTIMER class
+import bb.system 1.2
 
 Page {
     id: startpage
     attachedObjects: [
+        SystemToast {
+            id: cancelledAlert
+            body: "You will need to restart the app if you want to connect it later on"
+          },
         GetterRequest {
             id: getThis
             onCommandSent: {
@@ -65,7 +70,9 @@ Page {
             }
             onCancelRestart: {
                 mainContainer.enabled = false
+                cancelledAlert.show()
             }
+            
         }
     ]
     
