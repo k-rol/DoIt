@@ -30,7 +30,7 @@ GetterRequest::GetterRequest(QObject* parent)
     : QObject(parent)
     , m_networkAccessManager(new QNetworkAccessManager(this))
 {
-	passwordCounter = 1;
+
 }
 
 ///////////////////////
@@ -141,26 +141,6 @@ void GetterRequest::onGetReply()
 //To get specific info
 //END/////////////////////
 
-///////////////////////
-//To get the whatever from mocky.io
-///////////////////////
-void GetterRequest::whatEveRequest(const QString &rest)
-{
-	QUrl command (QString("%1%2").arg("http://www.mocky.io/v2/").arg(rest));
-
-	QNetworkRequest request(command);
-	QNetworkReply* response = m_networkAccessManager->get(request);
-	QString urltostring; urltostring = command.toEncoded();
-
-	emit commandSent(urltostring);
-
-	bool ok = connect(response, SIGNAL(finished()),this,SLOT(onGetStats()));
-	Q_ASSERT(ok);
-	Q_UNUSED(ok);
-}
-//END/////////////////////
-//To get the whatever from mocky.io
-//END/////////////////////
 
 ///////////////////////
 //To get the stats "se"
@@ -329,7 +309,7 @@ void GetterRequest::GetPassword()
 	timer->setObjectName("GetPassword");
 	timer->setSingleShot(true);
 	timer->start(3000);
-	RetryCounter counterClass;
+	//RetryCounter counterClass;
 	bool ok2 = connect(timer, SIGNAL(timeout()),this,SLOT(stopReplyTimer()));
 	//bool ok2 = connect(timer, SIGNAL(timeout()),&counterClass,SLOT(stopReplyTimer()));
 
@@ -367,7 +347,6 @@ void GetterRequest::onGetPassword()
 				settings.setValue("password", hexToPassword);
 				emit passwordReceived(hexToPassword.data());
 
-				passwordCounter = 0; //Reset password Counter
 			}
 		}
 
@@ -413,12 +392,6 @@ void GetterRequest::stopReplyTimer()
 
 }
 
-void GetterRequest::startTimer()
-{
-	qDebug() << "restart timer...";
-	emit reStartTimerSignal();
-}
-
 
 //END/////////////////////
 //SLOT called by QNetworkAccessManager
@@ -430,7 +403,5 @@ void GetterRequest::startTimer()
 GetterRequest::~GetterRequest() {
 	//delete m_networkAccessManager;
 	qDebug() << "*******GETTERREQUEST DESTROYED?********";
-	//Delete password from phone's memory
-	//QSettings settings;
-	//settings.remove("password");
+
 }

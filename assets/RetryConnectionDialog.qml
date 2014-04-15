@@ -1,13 +1,10 @@
 import bb.cascades 1.2
-import Network.GetterRequest 1.0
+import CustomSignals 1.0
 
 Dialog {
     id: retryDialog
-    attachedObjects: [
-        GetterRequest {
-            id: getThis
-        }
-    ]
+    signal sendRestart()
+
     Container {
         preferredWidth: 768
         preferredHeight: 1280
@@ -57,9 +54,11 @@ Dialog {
                     }
                     Button {
                         text: "Retry"
+                        
                         preferredWidth: 262.0
                         onClicked: {
-                        	getThis.GetPassword()
+                        	//cSignals.restartGetPasswordSlot()
+                        	sendRestart()
                         	retryDialog.close()
                         }
                     }

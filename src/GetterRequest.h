@@ -24,10 +24,6 @@ public Q_SLOTS:
     void GetRequest(const QString &password, const QString &cmd, const QString &cmdbyte);
     void StatRequest(const QString &password, const QString &cmd);
     void GetPassword();
-    void startTimer();
-
-    void whatEveRequest(const QString &rest);
-
 
 Q_SIGNALS:
     void responseReceived(const QString &info);
@@ -35,8 +31,6 @@ Q_SIGNALS:
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
     void timerTimesOut(const QString &requestName);
-    void passwordfailedDialog();
-    void reStartTimerSignal();
     void signalGetPassword();
 
 
@@ -50,8 +44,7 @@ private:
     QNetworkAccessManager* m_networkAccessManager;
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
-    int passwordCounter;
-    //QNetworkReply* replyStatsPointer;
+
 
 };
 

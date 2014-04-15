@@ -6,57 +6,66 @@ import QTimerLibrary 1.0 //QTIMER class
 Page {
     id: startpage
     attachedObjects: [
-    GetterRequest {
-        id: getThis
-        onCommandSent: {
-            commandArea.text = commandSent;
-        }
-        onResponseReceived: {
+        GetterRequest {
+            id: getThis
+            onCommandSent: {
+                commandArea.text = commandSent;
+            }
             
-            responseArea.text = info;
+            onResponseReceived: {
+                responseArea.text = info;
+            }
+
+            onStatsReceived: {
+                responseArea.text = info
+                batteryLabel.text = info2 + "%"
+                camMode.text = info3
+            }
+            
+            onPasswordReceived: {
+                seTimer.start()
+                responseArea.text = "Connecting..."
+            }
+            
+            onTimerTimesOut: {
+                seTimer.stop()
+                //sxTimer.stop()
+            }
+            
+            onSignalGetPassword: {
+                var pcount = doitsettings.getSettings("GetPassword")
+                //console.debug("pcount:", pcount)
+                pcount++
+                doitsettings.setSettings("GetPassword", pcount)
+                
+                if (pcount != 3) {
+                    //console.debug("pcount:", pcount)
+                    //console.debug("2nd or 3rd Getpassword")
+                    GetPassword()
+                }
+                if (pcount == 3) {
+                    //console.debug("Start retryDialog and pcount=",pcount)
+                    retryDialog.open()
+                }
+            }
         
-        }
-        onStatsReceived: {
-            responseArea.text = info
-            batteryLabel.text = info2 + "%"
-            camMode.text = info3
-        }
-        onPasswordReceived: {
-            seTimer.start()
-            responseArea.text = "Connecting..."
-        }
-        onTimerTimesOut: {
-            seTimer.stop()
-            //sxTimer.stop()
-        }
-        onReStartTimerSignal: {
-            GetPassword();
-        }
-        onPasswordfailedDialog: {
-            retryDialog.open()
-        }
-        onSignalGetPassword: {
-            var  pcount = doitsettings.getSettings("GetPassword")
-            if (pcount != 3) {
-            	doitsettings.setSettings("GetPassword", pcount++)
-                GetPassword()
+        },
+        QTimer {
+            id: sxTimer
+            interval: 35000
+            onTimeout: {
+                getThis.StatRequest(doitsettings.getSettings("password"),"sx")
+            
+            }
+        },
+        RetryConnectionDialog {
+            id: retryDialog
+            onSendRestart: {
+                getPasswordwithCounter()
             }
         }
-        
-    },
-    QTimer {
-        id: sxTimer
-        interval: 35000
-        onTimeout: {
-            getThis.StatRequest(doitsettings.getSettings("password"),"sx")
-        
-        }
-    },
-    RetryConnectionDialog {
-        id: retryDialog
-    }
-]
-     
+    ]
+    
     Container {
         layout: DockLayout {}
         //SE TIMER every 10 seconds
@@ -83,7 +92,7 @@ Page {
             opacity: 0.4
         }
         Container {
-
+            
             Container {
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
@@ -126,27 +135,27 @@ Page {
                             getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00");
                         }
                     }
-
-                }
-                /*                Button {
-                    text: qsTr("On") + Retranslate.onLocaleOrLanguageChanged
-                    
-                    onClicked: {
-                        
-                        getThis.GetRequest(doitsettings.getSettings("password"), "PW", "01");
-                    
-                    }
-                    preferredWidth: 10.0
                 
                 }
-                Button {
-                    text: qsTr("Off") + Retranslate.onLocaleOrLanguageChanged
-                    onClicked: {
-                        getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00")                
-                    }
-                    preferredWidth: 10.0
-                }*/
-
+                /*                Button {
+                 text: qsTr("On") + Retranslate.onLocaleOrLanguageChanged
+                 
+                 onClicked: {
+                 
+                 getThis.GetRequest(doitsettings.getSettings("password"), "PW", "01");
+                 
+                 }
+                 preferredWidth: 10.0
+                 
+                 }
+                 Button {
+                 text: qsTr("Off") + Retranslate.onLocaleOrLanguageChanged
+                 onClicked: {
+                 getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00")                
+                 }
+                 preferredWidth: 10.0
+                 }*/
+                
                 Label {
                     id: labelConnection
                     text: "  Hero3 White"
@@ -289,7 +298,7 @@ Page {
             
             Container {
                 horizontalAlignment: HorizontalAlignment.Center
-
+                
                 TextArea {
                     id: responseArea
                     text: qsTr("Not Connected")
@@ -316,7 +325,11 @@ Page {
     //GetPassword with Counter up to 3 times
     function getPasswordwithCounter()
     {
-        doitsettings.setSettings("counter", 1)
+        doitsettings.setSettings("GetPassword", 0)
+        var pcount = doitsettings.getSettings("GetPassword")
+        console.debug("pcount:", pcount)
+        
+        console.debug("First Getpassword")
         getThis.GetPassword()
     }
 }

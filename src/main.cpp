@@ -29,7 +29,6 @@
 #include "RetryCounter.h"
 
 
-
 using namespace bb::cascades;
 
 Q_DECL_EXPORT int main(int argc, char **argv)
@@ -39,6 +38,7 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qmlRegisterType<GetterRequest>("Network.GetterRequest", 1, 0, "GetterRequest");
     qmlRegisterType<Timer>("CustomerTimer", 1, 0, "Timer");
     qmlRegisterType<QTimer>("QTimerLibrary", 1, 0, "QTimer");
+
     //qmlRegisterType<QTimer>("my.library", 1, 0, "QTimer");
 
     // Create the Application UI object, this is where the main.qml file
