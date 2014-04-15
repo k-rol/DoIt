@@ -69,15 +69,14 @@ Page {
                 getPasswordwithCounter()
             }
             onCancelRestart: {
-                mainContainer.enabled = false
+                deactAllButPower()
                 cancelledAlert.show()
             }
-            
         }
     ]
-    
+    //Root Container
     Container {
-        id: mainContainer
+        id: rootContainer
         layout: DockLayout {}
         //SE TIMER every 10 seconds
         Timer {
@@ -102,8 +101,9 @@ Page {
             scalingMethod: ScalingMethod.AspectFill
             opacity: 0.4
         }
+        //Container with anything other than background
         Container {
-            
+            //Container with very top layer
             Container {
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
@@ -129,9 +129,11 @@ Page {
                 
                 }
             
-            }
+            }//End of very top layer Container
             
+            //Container with ToggleButton+CamTitle+Battery%
             Container {
+                id: secondlayerContainer
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 
@@ -148,25 +150,6 @@ Page {
                     }
                 
                 }
-                /*                Button {
-                 text: qsTr("On") + Retranslate.onLocaleOrLanguageChanged
-                 
-                 onClicked: {
-                 
-                 getThis.GetRequest(doitsettings.getSettings("password"), "PW", "01");
-                 
-                 }
-                 preferredWidth: 10.0
-                 
-                 }
-                 Button {
-                 text: qsTr("Off") + Retranslate.onLocaleOrLanguageChanged
-                 onClicked: {
-                 getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00")                
-                 }
-                 preferredWidth: 10.0
-                 }*/
-                
                 Label {
                     id: labelConnection
                     text: "  Hero3 White"
@@ -180,6 +163,7 @@ Page {
                     translationY: 10.0
                 }
                 ImageView {
+                    id: batteryImage
                     imageSource: "asset:///images/battery-full-icon4.png"
                     scaleX: 0.75
                     scaleY: 0.75
@@ -193,9 +177,11 @@ Page {
                 
                 }
             
-            }
+            }//End of secondlayerContainer
             
+            //Container with Video Taken / Pix Taken
             Container {
+                id: firstrowInfoContainer
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 
@@ -226,9 +212,11 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Center
                     }
                 }
-            }
+            }//End firstrowInfoContainer
             
+            //Container with PhotoRes/CamMode
             Container {
+                id: secrowInfoContainer
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 
@@ -261,8 +249,11 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Center
                     }
                 }
-            }
+            }//secrowInfoContainer
+            
+            //Container with the 4 buttons
             Container {
+                id: buttonsContainer
                 layout: StackLayout {
                 
                 }
@@ -305,9 +296,11 @@ Page {
                         text: "Recording"
                     }
                 }
-            }
+            }//buttonsContainer
             
+            //Container with Status textarea
             Container {
+                id: textareaContainer
                 horizontalAlignment: HorizontalAlignment.Center
                 
                 TextArea {
@@ -318,16 +311,18 @@ Page {
                     }
                     textStyle.fontWeight: FontWeight.W400
                     textStyle.fontSize: FontSize.XSmall
+                    enabled: false
                 }    
-            }
+            }//End of textareaContainer
             
             TextArea {
                 id: commandArea
                 text: "Command here."
                 visible: false
             }
-        }
-    }
+        }//End of Container with anything other than background
+    }//End Root Container
+    
     onCreationCompleted: {
         //getThis.GetPassword()
         getPasswordwithCounter()
@@ -342,5 +337,12 @@ Page {
         
         console.debug("First Getpassword")
         getThis.GetPassword()
+    }
+    
+    function deactAllButPower()
+    {
+        batteryImage.imageSource = "asset:///images/battery-full-icon0.png"
+        buttonsContainer.enabled = false
+        responseArea.text = "Please restart DoIt GoPro to retry to connect..."
     }
 }

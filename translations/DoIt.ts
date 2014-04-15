@@ -50,7 +50,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="315"/>
+        <location filename="../assets/Start.qml" line="308"/>
         <source>Not Connected</source>
         <translation type="unfinished"></translation>
     </message>
