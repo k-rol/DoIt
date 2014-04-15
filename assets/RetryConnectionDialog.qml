@@ -1,10 +1,9 @@
 import bb.cascades 1.2
-import CustomSignals 1.0
 
 Dialog {
     id: retryDialog
     signal sendRestart()
-
+    signal cancelRestart()
     Container {
         preferredWidth: 768
         preferredHeight: 1280
@@ -66,6 +65,7 @@ Dialog {
                         text: "Cancel"
                         preferredWidth: 262.0
                         onClicked: {
+                            cancelRestart()
                             retryDialog.close()
                         }
                                             

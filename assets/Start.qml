@@ -63,10 +63,14 @@ Page {
             onSendRestart: {
                 getPasswordwithCounter()
             }
+            onCancelRestart: {
+                mainContainer.enabled = false
+            }
         }
     ]
     
     Container {
+        id: mainContainer
         layout: DockLayout {}
         //SE TIMER every 10 seconds
         Timer {

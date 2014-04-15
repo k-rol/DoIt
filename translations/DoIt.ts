@@ -45,12 +45,12 @@
 <context>
     <name>Start</name>
     <message>
-        <location filename="../assets/Start.qml" line="107"/>
+        <location filename="../assets/Start.qml" line="111"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="304"/>
+        <location filename="../assets/Start.qml" line="308"/>
         <source>Not Connected</source>
         <translation type="unfinished"></translation>
     </message>
