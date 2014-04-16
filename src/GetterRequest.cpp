@@ -6,7 +6,6 @@
  */
 
 #include "GetterRequest.h"
-#include "RetryCounter.h"
 
 
 #include <bb/data/JsonDataAccess>

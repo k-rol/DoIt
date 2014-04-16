@@ -28,6 +28,7 @@ Page {
             }
             
             onPasswordReceived: {
+                inProcess.stop()
                 seTimer.start()
                 responseArea.text = "Connecting..."
             }
@@ -50,6 +51,7 @@ Page {
                 }
                 if (pcount == 3) {
                     //console.debug("Start retryDialog and pcount=",pcount)
+                    inProcess.stop()
                     retryDialog.open()
                 }
             }
@@ -69,6 +71,7 @@ Page {
                 getPasswordwithCounter()
             }
             onCancelRestart: {
+                inProcess.stop()
                 deactAllButPower()
                 cancelledAlert.show()
             }
@@ -93,7 +96,7 @@ Page {
             }
             visible: false
         }
-        //SX TIMER every 30 seconds
+        
         ImageView {
             imageSource: "asset:///backgrounds/1.jpg"
             horizontalAlignment: HorizontalAlignment.Fill
@@ -101,9 +104,11 @@ Page {
             scalingMethod: ScalingMethod.AspectFill
             opacity: 0.4
         }
+
         //Container with anything other than background
         Container {
             //Container with very top layer
+            
             Container {
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
@@ -164,7 +169,7 @@ Page {
                 }
                 ImageView {
                     id: batteryImage
-                    imageSource: "asset:///images/battery-full-icon4.png"
+                    imageSource: "asset:///images/battery-full-icon.png"
                     scaleX: 0.75
                     scaleY: 0.75
                     translationY: -30.0
@@ -250,53 +255,69 @@ Page {
                     }
                 }
             }//secrowInfoContainer
-            
-            //Container with the 4 buttons
+            //Container for ActivityIndicator+4buttons
             Container {
-                id: buttonsContainer
-                layout: StackLayout {
+                layout: DockLayout {
                 
                 }
-                
                 horizontalAlignment: HorizontalAlignment.Center
-                topMargin: 0.0
-                topPadding: 20.0
-                bottomMargin: 0.0
+                verticalAlignment: VerticalAlignment.Center
+                
+                
+                //Container with the 4 buttons
                 Container {
+                    id: buttonsContainer
                     layout: StackLayout {
-                        orientation: LayoutOrientation.LeftToRight
                     
                     }
                     
-                    Button {
-                        text: "stats"
-                        onClicked: {
-                            getThis.StatRequest(doitsettings.getSettings("password"),"se")
-                        }
-                    }
-                    Button {
-                        text: "mocky"
-                        onClicked: {
-                            getThis.whatEveRequest("5320c1c979841eda163125a8")
-                        }
-                    }
-                }
-                Container {
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.LeftToRight
-                    
-                    }
-                    
+                    horizontalAlignment: HorizontalAlignment.Center
                     topMargin: 0.0
                     topPadding: 20.0
-                    Button {
-                        text: "Snap Picture"
+                    bottomMargin: 0.0
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        
+                        }
+                        
+                        Button {
+                            text: "stats"
+                            onClicked: {
+                                getThis.StatRequest(doitsettings.getSettings("password"),"se")
+                            }
+                        }
+                        Button {
+                            text: "mocky"
+                            onClicked: {
+                                getThis.whatEveRequest("5320c1c979841eda163125a8")
+                            }
+                        }
                     }
-                    Button {
-                        text: "Recording"
+                    Container {
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        
+                        }
+                        
+                        topMargin: 0.0
+                        topPadding: 20.0
+                        Button {
+                            text: "Snap Picture"
+                        }
+                        Button {
+                            text: "Recording"
+                        }
                     }
+                }//End of 4 buttons Container
+                ActivityIndicator {
+                    id: inProcess
+                    preferredWidth: 130
+                    preferredHeight: 130
+                    horizontalAlignment: HorizontalAlignment.Center
+                    verticalAlignment: VerticalAlignment.Center
                 }
-            }//buttonsContainer
+            }//End of Container for ActivityIndicator+4buttons
             
             //Container with Status textarea
             Container {
@@ -331,6 +352,7 @@ Page {
     //GetPassword with Counter up to 3 times
     function getPasswordwithCounter()
     {
+        inProcess.start()
         doitsettings.setSettings("GetPassword", 0)
         var pcount = doitsettings.getSettings("GetPassword")
         console.debug("pcount:", pcount)
