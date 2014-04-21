@@ -38,7 +38,7 @@ Page {
                 //sxTimer.stop()
             }
             
-            onSignalGetPassword: {
+            onSignalNotGetPassword: {
                 var pcount = doitsettings.getSettings("GetPassword")
                 //console.debug("pcount:", pcount)
                 pcount++
@@ -48,11 +48,27 @@ Page {
                     //console.debug("pcount:", pcount)
                     //console.debug("2nd or 3rd Getpassword")
                     GetPassword()
+                    responseArea.text = "Attempt to get password..."
                 }
                 if (pcount == 3) {
                     //console.debug("Start retryDialog and pcount=",pcount)
                     inProcess.stop()
                     retryDialog.open()
+                    responseArea.text = "Cannot connect to GoPro"
+                }
+            }
+            
+            onSignalNotGetStats: {
+                var scount = doitsettings.getSettings("GetStats")
+                scount++
+                doitsettings.setSettings("GetStats", scount)
+                
+                if (scount = 3) {
+                    deactAllButPower()
+                    powerButton.setChecked(false)
+                    responseArea.text = "Disconnected!"
+                    seTimer.stop()
+                    getPasswordwithCounter()
                 }
             }
         
@@ -145,6 +161,7 @@ Page {
                 
                 }
                 ToggleButton {
+                    id: powerButton
                     checked: false
                     onCheckedChanged: {
                         if (checked == true){
@@ -359,6 +376,10 @@ Page {
         console.debug("pcount:", pcount)
         
         console.debug("First Getpassword")
+        
+        //reset failed stat counter
+        doitsettings.setSettings("GetStats", 0)
+        
         getThis.GetPassword()
     }
     

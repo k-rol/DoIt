@@ -31,7 +31,8 @@ Q_SIGNALS:
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
     void timerTimesOut(const QString &requestName);
-    void signalGetPassword();
+    void signalNotGetPassword();
+    void signalNotGetStats();
 
 
 private Q_SLOTS:

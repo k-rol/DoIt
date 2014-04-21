@@ -380,13 +380,13 @@ void GetterRequest::stopReplyTimer()
 
 	if (timer->objectName() == "GetPassword")
 	{
-		emit signalGetPassword();
+		emit signalNotGetPassword();
 
 	}
 
-	else if (timer->objectName() == "StatRequest") {
-		//emit timerTimesOut("neverconected");
-		//powerbutton at off
+	else if (timer->objectName() == "StatRequest")
+	{
+		emit signalNotGetStats();
 	}
 
 }
