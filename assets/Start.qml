@@ -72,7 +72,8 @@ Page {
             }
             onCancelRestart: {
                 inProcess.stop()
-                deactAllButPower()
+                //deactAllButPower()
+                deactAllbuttons()
                 cancelledAlert.show()
             }
         }
@@ -366,5 +367,10 @@ Page {
         batteryImage.imageSource = "asset:///images/battery-full-icon0.png"
         buttonsContainer.enabled = false
         responseArea.text = "Please restart DoIt GoPro to retry to connect..."
+    }
+    
+    function deactAllbuttons()
+    {
+        rootContainer.enabled = false
     }
 }
