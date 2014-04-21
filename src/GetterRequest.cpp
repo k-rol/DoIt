@@ -189,9 +189,13 @@ void GetterRequest::onGetStats()
     QString response;
     float batteryLevel;
     QString camMode;
+    QVariant statusCode;
 
 
     if (reply) {
+
+    	statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+
         if (reply->error() == QNetworkReply::NoError) {
         	const int available = reply->bytesAvailable();
 
@@ -223,7 +227,19 @@ void GetterRequest::onGetStats()
         response = tr("Unable to retrieve request headers");
     }
 
-    emit statsReceived(response, batteryLevel, camMode);
+    switch (statusCode.toInt()) {
+		case 200:
+		case 201:
+		case 202:
+		case 203:
+		case 204:
+			emit statsReceived(response, batteryLevel, camMode);
+			break;
+		default:
+			emit signalNotGetStats();
+			break;
+	}
+
 }
 
 //Elements of SE STATS://

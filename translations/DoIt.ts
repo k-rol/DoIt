@@ -13,18 +13,18 @@
     <name>GetterRequest</name>
     <message>
         <location filename="../src/GetterRequest.cpp" line="126"/>
-        <location filename="../src/GetterRequest.cpp" line="215"/>
+        <location filename="../src/GetterRequest.cpp" line="219"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GetterRequest.cpp" line="134"/>
-        <location filename="../src/GetterRequest.cpp" line="223"/>
+        <location filename="../src/GetterRequest.cpp" line="227"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="353"/>
+        <location filename="../src/GetterRequest.cpp" line="369"/>
         <source>Error: %1 Status: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,12 +45,12 @@
 <context>
     <name>Start</name>
     <message>
-        <location filename="../assets/Start.qml" line="140"/>
+        <location filename="../assets/Start.qml" line="146"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="347"/>
+        <location filename="../assets/Start.qml" line="353"/>
         <source>Not Connected</source>
         <translation type="unfinished"></translation>
     </message>

@@ -22,6 +22,11 @@ Page {
             }
 
             onStatsReceived: {
+                //reset NoStat counter
+                doitsettings.setSettings("GetStats", 0)
+                
+                buttonsContainer.enabled = true
+                
                 responseArea.text = info
                 batteryLabel.text = info2 + "%"
                 camMode.text = info3
@@ -59,12 +64,16 @@ Page {
             }
             
             onSignalNotGetStats: {
+                responseArea.text = "Problem with connection..."
+                
                 var scount = doitsettings.getSettings("GetStats")
                 scount++
+                console.debug("SCOUNT: ",scount)
                 doitsettings.setSettings("GetStats", scount)
                 
-                if (scount = 3) {
+                if (scount == 3) {
                     deactAllButPower()
+                    resetNumbers()
                     powerButton.setChecked(false)
                     responseArea.text = "Disconnected!"
                     seTimer.stop()
@@ -388,6 +397,12 @@ Page {
         batteryImage.imageSource = "asset:///images/battery-full-icon0.png"
         buttonsContainer.enabled = false
         responseArea.text = "Please restart DoIt GoPro to retry to connect..."
+    }
+    
+    function resetNumbers()
+    {
+        batteryLabel.text = "-%"
+        camMode.text = "Unknown"
     }
     
     function deactAllbuttons()
