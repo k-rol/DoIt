@@ -24,12 +24,34 @@
 
 #include "GetterRequest.h"
 #include "timer.h"
+#include "Settings.h"
 
 using namespace bb::cascades;
+using ::bb::cascades::Application;
+
+QString getValue() {
+Settings settings;
+// use "theme" key for property showing what theme to use on application start
+return settings.getSettings("theme", "");
+}
+
+
+void myMessageOutput(QtMsgType type, const char* msg) {
+Q_UNUSED(type);
+   fprintf(stdout, "%s\n", msg);
+   fflush(stdout);
+}
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
+	// update env variable before an application instance created
+	qputenv("CASCADES_THEME", getValue().toUtf8());
+
     Application app(argc, argv);
+
+#ifndef QT_NO_DEBUG
+   qInstallMsgHandler(myMessageOutput);
+   #endif
 
     qmlRegisterType<GetterRequest>("Network.GetterRequest", 1, 0, "GetterRequest");
     qmlRegisterType<Timer>("CustomerTimer", 1, 0, "Timer");

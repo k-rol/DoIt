@@ -22,6 +22,9 @@
 #include <bb/cascades/LocaleHandler>
 #include <QSettings>
 
+//For Theme setting
+#include "Settings.h"
+
 //For Static ActiveFrame
 #include <bb/cascades/SceneCover>
 #include <bb/cascades/Container>
@@ -59,6 +62,10 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     //set context for using as QSettings
     qml->setContextProperty("doitsettings",this);
+
+    // Create settings object and export it to qml
+    Settings *settings = new Settings();
+    qml->setContextProperty("Settings", settings);
 
     //Create the Dynamic ActiveFrame using ActiveFrameUpdater.qml
     ActiveFrameUpdater *activeFrame = new ActiveFrameUpdater();

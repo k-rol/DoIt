@@ -51,7 +51,8 @@
     <!-- Copyright information. Optional. -->
     <!-- <copyright></copyright> -->
     
-    <env var="CASCADES_THEME" value="dark"/>
+    <!-- This is to set an unique theme whatever the device. -->
+    <!-- <env var="CASCADES_THEME" value="dark"/> -->
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <configuration name="Device-Debug">

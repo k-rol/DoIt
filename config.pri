@@ -21,6 +21,7 @@ device {
         SOURCES +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.cpp) \
                  $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/QmlBeam.cpp) \
+                 $$quote($$BASEDIR/src/Settings.cpp) \
                  $$quote($$BASEDIR/src/WifiInfo.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
@@ -29,6 +30,7 @@ device {
         HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
                  $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/QmlBeam.h) \
+                 $$quote($$BASEDIR/src/Settings.h) \
                  $$quote($$BASEDIR/src/WifiInfo.h) \
                  $$quote($$BASEDIR/src/applicationui.hpp) \
                  $$quote($$BASEDIR/src/timer.h)
@@ -53,6 +55,7 @@ device {
         SOURCES +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.cpp) \
                  $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/QmlBeam.cpp) \
+                 $$quote($$BASEDIR/src/Settings.cpp) \
                  $$quote($$BASEDIR/src/WifiInfo.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
@@ -61,6 +64,7 @@ device {
         HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
                  $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/QmlBeam.h) \
+                 $$quote($$BASEDIR/src/Settings.h) \
                  $$quote($$BASEDIR/src/WifiInfo.h) \
                  $$quote($$BASEDIR/src/applicationui.hpp) \
                  $$quote($$BASEDIR/src/timer.h)
@@ -87,6 +91,7 @@ simulator {
         SOURCES +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.cpp) \
                  $$quote($$BASEDIR/src/GetterRequest.cpp) \
                  $$quote($$BASEDIR/src/QmlBeam.cpp) \
+                 $$quote($$BASEDIR/src/Settings.cpp) \
                  $$quote($$BASEDIR/src/WifiInfo.cpp) \
                  $$quote($$BASEDIR/src/applicationui.cpp) \
                  $$quote($$BASEDIR/src/main.cpp) \
@@ -95,6 +100,7 @@ simulator {
         HEADERS +=  $$quote($$BASEDIR/src/ActiveFrameUpdater.h) \
                  $$quote($$BASEDIR/src/GetterRequest.h) \
                  $$quote($$BASEDIR/src/QmlBeam.h) \
+                 $$quote($$BASEDIR/src/Settings.h) \
                  $$quote($$BASEDIR/src/WifiInfo.h) \
                  $$quote($$BASEDIR/src/applicationui.hpp) \
                  $$quote($$BASEDIR/src/timer.h)

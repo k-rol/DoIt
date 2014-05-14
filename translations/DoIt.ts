@@ -41,6 +41,26 @@
         <source>password</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../assets/Settings.qml" line="52"/>
+        <source>Theme Selection:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Settings.qml" line="55"/>
+        <source>Bright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Settings.qml" line="60"/>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/Settings.qml" line="69"/>
+        <source>Hello Themes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Start</name>
