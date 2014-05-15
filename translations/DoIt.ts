@@ -56,11 +56,6 @@
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../assets/Settings.qml" line="69"/>
-        <source>Hello Themes</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Start</name>

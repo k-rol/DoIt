@@ -44,6 +44,10 @@ Q_UNUSED(type);
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
+	//Sets apps name ready for QSettings
+    QCoreApplication::setOrganizationName("KRol");
+    QCoreApplication::setApplicationName("DoIt GoPro");
+
 	// update env variable before an application instance created
 	qputenv("CASCADES_THEME", getValue().toUtf8());
 

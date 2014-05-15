@@ -67,6 +67,8 @@ Sheet {
                 onCreationCompleted: {
                     var theme = Settings.getSettings("theme", VisualStyle.Bright == themeDropDown.selectedValue ? "bright" : "dark");
                     themeDropDown.setSelectedIndex("bright" == theme ? 0 : 1);
+                    console.debug("VISUAL THEME")
+                    console.debug(theme)
                 }
             }
         }

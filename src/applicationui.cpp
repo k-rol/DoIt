@@ -39,9 +39,6 @@ using namespace bb::cascades;
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
         QObject(app)
 {
-    QCoreApplication::setOrganizationName("KRol");
-    QCoreApplication::setApplicationName("DoIt GoPro");
-
     // prepare the localization
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
@@ -61,7 +58,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
     //set context for using as QSettings
-    qml->setContextProperty("doitsettings",this);
+    //qml->setContextProperty("doitsettings",this);
 
     // Create settings object and export it to qml
     Settings *settings = new Settings();
