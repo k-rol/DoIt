@@ -9,8 +9,8 @@ Sheet {
             acceptAction: ActionItem {
                 title: "Save"
                 onTriggered: {
-                    doitsettings.setSettings(passwordField.objectName, passwordField.text)
-                    doitsettings.syncSettings()
+                    Settings.setSettings(passwordField.objectName, passwordField.text)
+                    //Settings.syncSettings()
                     mySheet.close()
                 }
 
@@ -34,7 +34,7 @@ Sheet {
                 id: passwordField
                 input.masking: TextInputMasking.Masked
                 hintText: qsTr("password")
-                text: doitsettings.getSettings("password")
+                text: Settings.getSettings("password", "")
                 
                 objectName: "password"
                 verticalAlignment: VerticalAlignment.Top

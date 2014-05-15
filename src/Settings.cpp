@@ -23,5 +23,11 @@ void Settings::setSettings(const QString &objectName, const QString &inputValue)
         settings.setValue(objectName, QVariant(inputValue));
 }
 
+void Settings::syncSettings()
+{
+	QSettings settings;
+	settings.sync();
+}
+
 Settings::~Settings() {
 }

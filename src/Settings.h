@@ -31,6 +31,9 @@ public:
          */
         Q_INVOKABLE
         void setSettings(const QString &objectName, const QString &inputValue);
+
+        Q_INVOKABLE
+        void syncSettings();
 };
 
 #endif

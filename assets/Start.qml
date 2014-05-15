@@ -23,7 +23,7 @@ Page {
 
             onStatsReceived: {
                 //reset NoStat counter
-                doitsettings.setSettings("GetStats", 0)
+                Settings.setSettings("GetStats", 0)
                 
                 buttonsContainer.enabled = true
                 
@@ -44,10 +44,10 @@ Page {
             }
             
             onSignalNotGetPassword: {
-                var pcount = doitsettings.getSettings("GetPassword")
+                var pcount = Settings.getSettings("GetPassword", 0)
                 //console.debug("pcount:", pcount)
                 pcount++
-                doitsettings.setSettings("GetPassword", pcount)
+                Settings.setSettings("GetPassword", pcount)
                 
                 if (pcount != 3) {
                     //console.debug("pcount:", pcount)
@@ -66,10 +66,10 @@ Page {
             onSignalNotGetStats: {
                 responseArea.text = "Problem with connection..."
                 
-                var scount = doitsettings.getSettings("GetStats")
+                var scount = Settings.getSettings("GetStats", 0)
                 scount++
                 console.debug("SCOUNT: ",scount)
-                doitsettings.setSettings("GetStats", scount)
+                Settings.setSettings("GetStats", scount)
                 
                 if (scount == 3) {
                     deactAllButPower()
@@ -86,7 +86,7 @@ Page {
             id: sxTimer
             interval: 35000
             onTimeout: {
-                getThis.StatRequest(doitsettings.getSettings("password"),"sx")
+                getThis.StatRequest(Settings.getSettings("password", ""),"sx")
             
             }
         },
@@ -113,7 +113,7 @@ Page {
             interval: 5000
             
             onTimeout: {
-                getThis.StatRequest(doitsettings.getSettings("password"),"se")
+                getThis.StatRequest(Settings.getSettings("password", ""),"se")
                 console.debug("seTimer")
                 if (responseArea.text = "Connecting...")
                 {
@@ -174,10 +174,10 @@ Page {
                     checked: false
                     onCheckedChanged: {
                         if (checked == true){
-                            getThis.GetRequest(doitsettings.getSettings("password"), "PW", "01");
+                            getThis.GetRequest(Settings.getSettings("password", ""), "PW", "01");
                         }
                         else {
-                            getThis.GetRequest(doitsettings.getSettings("password"), "PW", "00");
+                            getThis.GetRequest(Settings.getSettings("password", ""), "PW", "00");
                         }
                     }
                 
@@ -311,7 +311,7 @@ Page {
                         Button {
                             text: "stats"
                             onClicked: {
-                                getThis.StatRequest(doitsettings.getSettings("password"),"se")
+                                getThis.StatRequest(Settings.getSettings("password", ""),"se")
                             }
                         }
                         Button {
@@ -380,14 +380,14 @@ Page {
     function getPasswordwithCounter()
     {
         inProcess.start()
-        doitsettings.setSettings("GetPassword", 0)
-        var pcount = doitsettings.getSettings("GetPassword")
+        Settings.setSettings("GetPassword", 0)
+        var pcount = Settings.getSettings("GetPassword", 0)
         console.debug("pcount:", pcount)
         
         console.debug("First Getpassword")
         
         //reset failed stat counter
-        doitsettings.setSettings("GetStats", 0)
+        Settings.setSettings("GetStats", 0)
         
         getThis.GetPassword()
     }

@@ -57,10 +57,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
 
-    //set context for using as QSettings
-    //qml->setContextProperty("doitsettings",this);
-
-    // Create settings object and export it to qml
+    // Create QSettings object and export it to qml
     Settings *settings = new Settings();
     qml->setContextProperty("Settings", settings);
 
@@ -79,34 +76,6 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
     //Creates the Static ActiveFrame
     //addActiveFrame();
 }
-
-QString ApplicationUI::getSettings(const QString &settingObject)
-{
-	QSettings settings;
-
-	//if (settings.value(settingObject).isNull())
-	//{
-	//	return "";
-	//}
-
-
-	return settings.value(settingObject).toString();
-}
-
-void ApplicationUI::setSettings(const QString &settingObject, const QString &settingValue)
-{
-	QSettings settings;
-
-	settings.setValue(settingObject, QVariant(settingValue));
-
-}
-
-void ApplicationUI::syncSettings()
-{
-	QSettings settings;
-	settings.sync();
-}
-
 
 void ApplicationUI::addActiveFrame()
 {
