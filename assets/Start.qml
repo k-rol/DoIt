@@ -3,6 +3,7 @@ import Network.GetterRequest 1.0
 import CustomerTimer 1.0 //QTIMER TIMER class
 import QTimerLibrary 1.0 //QTIMER class
 import bb.system 1.2
+import "asset:///otherfunctions.js" as CamFunctions 
 
 Page {
     id: startpage
@@ -23,18 +24,13 @@ Page {
 
             onStatsReceived: {
                 //reset NoStat counter
-                Settings.setSettings("GetStats", 0)
-                
-                buttonsContainer.enabled = true
-                
-                responseArea.text = info
-                batteryLabel.text = info2 + "%"
-                camMode.text = info3
+                CamFunctions.StatsReceived(response, batterypercent, mode)
             }
             
             onPasswordReceived: {
                 inProcess.stop()
                 seTimer.start()
+                sxTimer.Start()
                 responseArea.text = "Connecting..."
             }
             
@@ -44,45 +40,16 @@ Page {
             }
             
             onSignalNotGetPassword: {
-                var pcount = Settings.getSettings("GetPassword", 0)
-                //console.debug("pcount:", pcount)
-                pcount++
-                Settings.setSettings("GetPassword", pcount)
-                
-                if (pcount != 3) {
-                    //console.debug("pcount:", pcount)
-                    //console.debug("2nd or 3rd Getpassword")
-                    GetPassword()
-                    responseArea.text = "Attempt to get password..."
-                }
-                if (pcount == 3) {
-                    //console.debug("Start retryDialog and pcount=",pcount)
-                    inProcess.stop()
-                    retryDialog.open()
-                    responseArea.text = "Cannot connect to GoPro"
-                }
+                CamFunctions.NotGetPassword()
+
             }
             
             onSignalNotGetStats: {
-                responseArea.text = "Problem with connection..."
-                
-                var scount = Settings.getSettings("GetStats", 0)
-                scount++
-                console.debug("SCOUNT: ",scount)
-                Settings.setSettings("GetStats", scount)
-                
-                if (scount == 3) {
-                    deactAllButPower()
-                    resetNumbers()
-                    powerButton.setChecked(false)
-                    responseArea.text = "Disconnected!"
-                    seTimer.stop()
-                    getPasswordwithCounter()
-                }
+                CamFunctions.NotGetStats()
             }
         
         },
-        QTimer {
+        Timer {
             id: sxTimer
             interval: 35000
             onTimeout: {
@@ -93,12 +60,12 @@ Page {
         RetryConnectionDialog {
             id: retryDialog
             onSendRestart: {
-                getPasswordwithCounter()
+                CamFunctions.getPasswordwithCounter()
             }
             onCancelRestart: {
                 inProcess.stop()
-                //deactAllButPower()
-                deactAllbuttons()
+                //CamFunctions.deactAllButPower()
+                CamFunctions.deactAllbuttons()
                 cancelledAlert.show()
             }
         }
@@ -373,40 +340,7 @@ Page {
     
     onCreationCompleted: {
         //getThis.GetPassword()
-        getPasswordwithCounter()
+        CamFunctions.getPasswordwithCounter()
     }
     
-    //GetPassword with Counter up to 3 times
-    function getPasswordwithCounter()
-    {
-        inProcess.start()
-        Settings.setSettings("GetPassword", 0)
-        var pcount = Settings.getSettings("GetPassword", 0)
-        console.debug("pcount:", pcount)
-        
-        console.debug("First Getpassword")
-        
-        //reset failed stat counter
-        Settings.setSettings("GetStats", 0)
-        
-        getThis.GetPassword()
-    }
-    
-    function deactAllButPower()
-    {
-        batteryImage.imageSource = "asset:///images/battery-full-icon0.png"
-        buttonsContainer.enabled = false
-        responseArea.text = "Please restart DoIt GoPro to retry to connect..."
-    }
-    
-    function resetNumbers()
-    {
-        batteryLabel.text = "-%"
-        camMode.text = "Unknown"
-    }
-    
-    function deactAllbuttons()
-    {
-        rootContainer.enabled = false
-    }
 }

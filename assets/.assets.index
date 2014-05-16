@@ -1,5 +1,5 @@
 1
-17
+18
 About.qml
 backgrounds/1.jpg
 CamSettings.qml
@@ -13,6 +13,7 @@ images/dialogframe.png
 images/rec.png
 LivePreview.qml
 main.qml
+otherfunctions.js
 RetryConnectionDialog.qml
 Settings.qml
 Start.qml

@@ -200,6 +200,9 @@ void GetterRequest::onGetStats()
         	const int available = reply->bytesAvailable();
 
             if (available > 0) {
+            	qDebug() << "AVAILABLE";
+            	qDebug() << available;
+            	qDebug() << "AVAILABLE";
 
             	QByteArray buffer(reply->readAll());
 
@@ -235,8 +238,11 @@ void GetterRequest::onGetStats()
 		case 204:
 			emit statsReceived(response, batteryLevel, camMode);
 			break;
+		case 401:
+			emit signalNotGetStats(401);
+			break;
 		default:
-			emit signalNotGetStats();
+			emit signalNotGetStats(0);
 			break;
 	}
 
@@ -402,7 +408,7 @@ void GetterRequest::stopReplyTimer()
 
 	else if (timer->objectName() == "StatRequest")
 	{
-		emit signalNotGetStats();
+		emit signalNotGetStats(0);
 	}
 
 }

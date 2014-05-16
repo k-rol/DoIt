@@ -27,12 +27,12 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void responseReceived(const QString &info);
-    void statsReceived(const QString &info, const int &info2, const QString &info3);
+    void statsReceived(const QString &response, const int &batterypercent, const QString &mode);
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
     void timerTimesOut(const QString &requestName);
     void signalNotGetPassword();
-    void signalNotGetStats();
+    void signalNotGetStats(const int &code);
 
 
 private Q_SLOTS:
