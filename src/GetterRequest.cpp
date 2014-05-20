@@ -199,7 +199,7 @@ void GetterRequest::onGetStats()
         if (reply->error() == QNetworkReply::NoError) {
         	const int available = reply->bytesAvailable();
 
-            if (available > 0) {
+            if (available == 31) {
             	qDebug() << "AVAILABLE";
             	qDebug() << available;
             	qDebug() << "AVAILABLE";
@@ -217,6 +217,10 @@ void GetterRequest::onGetStats()
                 qDebug() << camMode;
 
             }
+
+            else if (available == 56) {
+
+			}
 
         } else {
             response =  tr("Error: %1 status: %2").arg(reply->errorString(), reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString());
