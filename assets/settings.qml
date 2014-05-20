@@ -7,43 +7,17 @@ Sheet {
             title: "Settings"
              kind: TitleBarKind.Default
             acceptAction: ActionItem {
-                title: "Save"
+                title: "Close"
                 onTriggered: {
-                    Settings.setSettings(passwordField.objectName, passwordField.text)
                     //Settings.syncSettings()
                     mySheet.close()
                 }
-
             }
-            dismissAction: ActionItem {
-                title: "Cancel"
-                onTriggered: {
-                    mySheet.close()
-                }
-            }
-
         }
         Container {
-            
-            Label {
-                text: qsTr("Enter your GoPro's WiFi Password:")
-                verticalAlignment: VerticalAlignment.Top
-            }
-            
-            TextField {
-                id: passwordField
-                input.masking: TextInputMasking.Masked
-                hintText: qsTr("password")
-                text: Settings.getSettings("password", "")
-                
-                objectName: "password"
-                verticalAlignment: VerticalAlignment.Top
-                maxWidth: 560.0
-                inputMode: TextFieldInputMode.Password
-            }
+                        
             topPadding: 40
-            leftPadding: 10
-
+            
             Container {
                 //Todo: fill me with QML
                 DropDown {
