@@ -27,7 +27,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void responseReceived(const QString &info);
-    void statsReceived(const QString &response, const int &batterypercent, const QString &mode);
+    void statsReceived(const QString &response, const int &batterypercent,const int &batteryBars, const QString &mode);
     void passwordReceived(const QString &pass);
     void commandSent(const QUrl &commandSent);
     void timerTimesOut(const QString &requestName);
@@ -45,6 +45,7 @@ private:
     QNetworkAccessManager* m_networkAccessManager;
     float mathBattery(QByteArray &hexCode);
     QString mathMode(QByteArray &hexCode);
+    int mathBatteryBars(QByteArray &hexCode);
 
 
 };

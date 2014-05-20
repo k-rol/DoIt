@@ -4,17 +4,18 @@
 
 //When onStatsReceived emitted
 //
-function StatsReceived(info, info2, info3)
+function StatsReceived(response, batterypercent, batteryBars, mode)
 {
     Settings.setSettings("GetStats", 0);
     
-    sxTimer.start();
+    //sxTimer.start();
     buttonsContainer.enabled = true;
     powerButton.setChecked(true);
     
-    responseArea.text = info;
-    batteryLabel.text = info2 + "%";
-    camMode.text = info3;	
+    responseArea.text = response;
+    batteryLabel.text = batterypercent + "%";
+    camMode.text = mode;
+    
 }
 
 //When the onSignalNotGetStats is emitted, it then calls this function 

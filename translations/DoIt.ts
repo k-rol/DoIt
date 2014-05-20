@@ -13,18 +13,18 @@
     <name>GetterRequest</name>
     <message>
         <location filename="../src/GetterRequest.cpp" line="126"/>
-        <location filename="../src/GetterRequest.cpp" line="222"/>
+        <location filename="../src/GetterRequest.cpp" line="229"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GetterRequest.cpp" line="134"/>
-        <location filename="../src/GetterRequest.cpp" line="230"/>
+        <location filename="../src/GetterRequest.cpp" line="237"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="375"/>
+        <location filename="../src/GetterRequest.cpp" line="393"/>
         <source>Error: %1 Status: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -32,27 +32,17 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../assets/Settings.qml" line="29"/>
-        <source>Enter your GoPro&apos;s WiFi Password:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Settings.qml" line="36"/>
-        <source>password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/Settings.qml" line="52"/>
+        <location filename="../assets/Settings.qml" line="26"/>
         <source>Theme Selection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="55"/>
+        <location filename="../assets/Settings.qml" line="29"/>
         <source>Bright</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="60"/>
+        <location filename="../assets/Settings.qml" line="34"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>

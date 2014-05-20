@@ -186,10 +186,14 @@ void GetterRequest::onGetStats()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
+    //SE properties
     QString response;
     float batteryLevel;
     QString camMode;
     QVariant statusCode;
+
+    //SX properties
+    int batteryIcon;
 
 
     if (reply) {
@@ -207,18 +211,55 @@ void GetterRequest::onGetStats()
             	QByteArray buffer(reply->readAll());
 
                 QString something(buffer.toHex());
-                response = something;
 
+                response = something;
                 batteryLevel = mathBattery(buffer);
                 camMode = mathMode(buffer);
+
 
                 qDebug() << response;
                 qDebug() << batteryLevel;
                 qDebug() << camMode;
 
+                switch (statusCode.toInt()) {
+            		case 200:
+            		case 201:
+            		case 202:
+            		case 203:
+            		case 204:
+            			emit statsReceived(response, batteryLevel, camMode);
+            			break;
+            		case 401:
+            			emit signalNotGetStats(401);
+            			break;
+            		default:
+            			emit signalNotGetStats(0);
+            			break;
+            	}
+
             }
 
             else if (available == 56) {
+
+            	QByteArray buffer(reply->readAll());
+            	batteryIcon = mathBatteryBars(buffer);
+            	qDebug() << batteryIcon;
+
+                switch (statusCode.toInt()) {
+            		case 200:
+            		case 201:
+            		case 202:
+            		case 203:
+            		case 204:
+            			emit statsReceived(response, batteryLevel, batteryIcon, camMode);
+            			break;
+            		case 401:
+            			emit signalNotGetStats(401);
+            			break;
+            		default:
+            			emit signalNotGetStats(0);
+            			break;
+            	}
 
 			}
 
@@ -233,22 +274,6 @@ void GetterRequest::onGetStats()
     if (response.trimmed().isEmpty()) {
         response = tr("Unable to retrieve request headers");
     }
-
-    switch (statusCode.toInt()) {
-		case 200:
-		case 201:
-		case 202:
-		case 203:
-		case 204:
-			emit statsReceived(response, batteryLevel, camMode);
-			break;
-		case 401:
-			emit signalNotGetStats(401);
-			break;
-		default:
-			emit signalNotGetStats(0);
-			break;
-	}
 
 }
 
@@ -305,6 +330,17 @@ QString GetterRequest::mathMode(QByteArray &hexCode) //
 	}
 
 	return camMode;
+
+}
+
+//Elements of SX STATS://
+///Get battery percentage level
+int GetterRequest::mathBatteryBars(QByteArray &hexCode) //
+{
+	bool ok;
+	int batteryBars;
+	batteryBars = hexCode.toHex().mid(38,2).toInt(&ok,16);
+	return batteryBars;
 
 }
 

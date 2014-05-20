@@ -24,7 +24,7 @@ Page {
 
             onStatsReceived: {
                 //reset NoStat counter
-                CamFunctions.StatsReceived(response, batterypercent, mode)
+                CamFunctions.StatsReceived(response, batterypercent, batteryBars, mode)
             }
             
             onPasswordReceived: {
