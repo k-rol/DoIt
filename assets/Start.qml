@@ -8,6 +8,29 @@ import "asset:///otherfunctions.js" as CamFunctions
 Page {
     id: startpage
     attachedObjects: [
+        Timer {
+            id: sxTimer
+            interval: 5500
+            onTimeout: {
+                getThis.StatRequest(Settings.getSettings("password", ""),"sx")
+            
+            }
+        },
+        //SE TIMER every 10 seconds
+        Timer {
+            id: seTimer
+            interval: 5000
+            
+            onTimeout: {
+                getThis.StatRequest(Settings.getSettings("password", ""),"se")
+                console.debug("seTimer")
+                if (responseArea.text = "Connecting...")
+                {
+                    responseArea.text = "Connected!"
+                }
+            }
+            visible: false
+        },
         SystemToast {
             id: cancelledAlert
             body: "You will need to restart the app if you want to connect it later on"
@@ -24,23 +47,45 @@ Page {
 
             onStatsReceived: {
                 //reset NoStat counter
-                CamFunctions.StatsReceived(response, batterypercent, batteryBars, mode)
+                CamFunctions.StatsReceived(response, batterypercent, mode)
+            }
+            
+            onStatSXReceived: {
+                CamFunctions.StatSXReceived(batteryBars)
+                
             }
             
             onPasswordReceived: {
                 inProcess.stop()
                 seTimer.start()
-                sxTimer.Start()
+                sxTimer.start()
                 responseArea.text = "Connecting..."
             }
             
             onTimerTimesOut: {
                 seTimer.stop()
-                //sxTimer.stop()
+                sxTimer.stop()
             }
             
             onSignalNotGetPassword: {
-                CamFunctions.NotGetPassword()
+                //CamFunctions.NotGetPassword()
+                var pcount = Settings.getSettings("GetPassword", 0);
+                //console.debug("pcount:", pcount)
+                pcount++;
+                Settings.setSettings("GetPassword", pcount);
+                
+                if (pcount != 3) {
+                    //console.debug("pcount:", pcount)
+                    //console.debug("2nd or 3rd Getpassword")
+                    GetPassword();
+                    responseArea.text = "Attempt to get password...";
+                }
+                if (pcount == 3) {
+                    //console.debug("Start retryDialog and pcount=",pcount)
+                    inProcess.stop();
+                    retryDialog.open();
+                    responseArea.text = "Cannot connect to GoPro";
+                }	
 
             }
             
@@ -48,14 +93,6 @@ Page {
                 CamFunctions.NotGetStats()
             }
         
-        },
-        Timer {
-            id: sxTimer
-            interval: 35000
-            onTimeout: {
-                getThis.StatRequest(Settings.getSettings("password", ""),"sx")
-            
-            }
         },
         RetryConnectionDialog {
             id: retryDialog
@@ -74,21 +111,6 @@ Page {
     Container {
         id: rootContainer
         layout: DockLayout {}
-        //SE TIMER every 10 seconds
-        Timer {
-            id: seTimer
-            interval: 5000
-            
-            onTimeout: {
-                getThis.StatRequest(Settings.getSettings("password", ""),"se")
-                console.debug("seTimer")
-                if (responseArea.text = "Connecting...")
-                {
-                    responseArea.text = "Connected!"
-                }
-            }
-            visible: false
-        }
         
         ImageView {
             imageSource: "asset:///backgrounds/1.jpg"
@@ -163,7 +185,7 @@ Page {
                 }
                 ImageView {
                     id: batteryImage
-                    imageSource: "asset:///images/battery-full-icon.png"
+                    imageSource: "asset:///images/battery-full-icon3.png"
                     scaleX: 0.75
                     scaleY: 0.75
                     translationY: -30.0

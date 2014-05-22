@@ -13,18 +13,18 @@
     <name>GetterRequest</name>
     <message>
         <location filename="../src/GetterRequest.cpp" line="126"/>
-        <location filename="../src/GetterRequest.cpp" line="229"/>
+        <location filename="../src/GetterRequest.cpp" line="267"/>
         <source>Error: %1 status: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/GetterRequest.cpp" line="134"/>
-        <location filename="../src/GetterRequest.cpp" line="237"/>
+        <location filename="../src/GetterRequest.cpp" line="275"/>
         <source>Unable to retrieve request headers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/GetterRequest.cpp" line="393"/>
+        <location filename="../src/GetterRequest.cpp" line="415"/>
         <source>Error: %1 Status: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -32,17 +32,17 @@
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../assets/Settings.qml" line="26"/>
+        <location filename="../assets/Settings.qml" line="25"/>
         <source>Theme Selection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="29"/>
+        <location filename="../assets/Settings.qml" line="28"/>
         <source>Bright</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Settings.qml" line="34"/>
+        <location filename="../assets/Settings.qml" line="33"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -50,12 +50,12 @@
 <context>
     <name>Start</name>
     <message>
-        <location filename="../assets/Start.qml" line="116"/>
+        <location filename="../assets/Start.qml" line="138"/>
         <source>DoIt GoPro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/Start.qml" line="323"/>
+        <location filename="../assets/Start.qml" line="345"/>
         <source>Not Connected</source>
         <translation type="unfinished"></translation>
     </message>

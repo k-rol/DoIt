@@ -230,10 +230,10 @@ void GetterRequest::onGetStats()
             			emit statsReceived(response, batteryLevel, camMode);
             			break;
             		case 401:
-            			emit signalNotGetStats(401);
+            			emit signalNotGetStats(statusCode.toInt());
             			break;
             		default:
-            			emit signalNotGetStats(0);
+            			emit signalNotGetStats(statusCode.toInt());
             			break;
             	}
 
@@ -251,13 +251,13 @@ void GetterRequest::onGetStats()
             		case 202:
             		case 203:
             		case 204:
-            			emit statsReceived(response, batteryLevel, batteryIcon, camMode);
+            			emit statSXReceived(batteryIcon);
             			break;
             		case 401:
-            			emit signalNotGetStats(401);
+            			emit signalNotGetStats(statusCode.toInt());
             			break;
             		default:
-            			emit signalNotGetStats(0);
+            			emit signalNotGetStats(statusCode.toInt());
             			break;
             	}
 

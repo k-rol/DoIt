@@ -21,7 +21,6 @@ Sheet {
             Container {
                 //Todo: fill me with QML
                 DropDown {
-                    topPadding: 20
                     id: themeDropDown
                     title: qsTr("Theme Selection:") + Retranslate.onLocaleOrLanguageChanged
                     

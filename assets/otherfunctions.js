@@ -4,7 +4,7 @@
 
 //When onStatsReceived emitted
 //
-function StatsReceived(response, batterypercent, batteryBars, mode)
+function StatsReceived(response, batterypercent, mode)
 {
     Settings.setSettings("GetStats", 0);
     
@@ -16,6 +16,31 @@ function StatsReceived(response, batterypercent, batteryBars, mode)
     batteryLabel.text = batterypercent + "%";
     camMode.text = mode;
     
+}
+
+function StatSXReceived(batterybars)
+{
+	switch(batterybars) {
+	case 0:
+		batteryImage.imageSource = "asset:///images/battery-full-icon0.png";
+		break;
+	case 1:
+		batteryImage.imageSource = "asset:///images/battery-full-icon1.png";
+		break;
+	case 2:
+		batteryImage.imageSource = "asset:///images/battery-full-icon2.png";
+		break;
+	case 3:
+		batteryImage.imageSource = "asset:///images/battery-full-icon3.png";
+		break;
+	case 4:
+		batteryImage.imageSource = "asset:///images/battery-full-icon4.png";
+		break;
+	default:
+		batteryImage.imageSource = null;
+		break;
+	
+	}
 }
 
 //When the onSignalNotGetStats is emitted, it then calls this function 
@@ -42,7 +67,7 @@ function NotGetStats()
 
 //When the onSignalNotGetPassword is emitted, it then calls this function 
 //
-function NoGetPassword()
+function NotGetPassword()
 {
     var pcount = Settings.getSettings("GetPassword", 0);
     //console.debug("pcount:", pcount)
@@ -52,7 +77,7 @@ function NoGetPassword()
     if (pcount != 3) {
         //console.debug("pcount:", pcount)
         //console.debug("2nd or 3rd Getpassword")
-        GetPassword();
+        getThis.GetPassword();
         responseArea.text = "Attempt to get password...";
     }
     if (pcount == 3) {
